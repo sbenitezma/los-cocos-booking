@@ -1,6 +1,6 @@
-// App Title
-.title {
-  @include font-style(color('primary'), 20px, 400, 20px);
+// Navigation items
+.headline-1 {
+  @include font-style(color('secondary'), 18px, 500, 18px, 0);
 }
 .title-1 {
   @include font-style(color('tertiary'), 20px, 900, 28.8px);

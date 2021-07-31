@@ -1,21 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap');
 
 // All variable changes need to happen before @import
-$body-font-family: 'Source Sans Pro', sans-serif !important;
-$heading-font-family: $body-font-family !important;
+$body-font-family: 'Tajawal', sans-serif;
+$heading-font-family: $body-font-family;
 $defaultColor: #01FFF7;
 
 // Setup theme colors
 $theme-colors: (
-        'primary': #1DA1F2,
-        'accent': #A0ACBD,
-        'secondary': #3C4856,
+        'primary': #1463b0,
+        'accent': #A5ABBD,
+        'secondary': #5f5e5d,
         'success': #00B697,
-        'info': #00C4F7,
-        'warning': #E19E21,
-        'error': #FB6B70,
-        'white': #e7eceb,
-        'tertiary': #717171
+        'info': #008CCB,
+        'warning': #D8A31A,
+        'error': #B63120,
+        'white': #E6F4F1,
+        'tertiary': #434343
 );
 
 $primary: map-get($theme-colors, 'primary');

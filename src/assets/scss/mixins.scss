@@ -11,12 +11,14 @@
 // Font Face
 // =============================================================================
 
-@mixin font-style($color, $fontSize, $fontWeight, $lineHeight){
-  color: $color;
-  font-size: calculateRem($fontSize);
-  font-weight: $fontWeight;
-  line-height: $lineHeight;
-
+@mixin font-style($color, $fontSize, $fontWeight, $lineHeight, $letterSpacing: none){
+  color: $color !important;
+  font-size: calculateRem($fontSize) !important;
+  font-weight: $fontWeight  !important;
+  line-height: $lineHeight !important;
+  @if $letterSpacing != false {
+    letter-spacing: $letterSpacing !important;
+  }
 }
 
 // =============================================================================
