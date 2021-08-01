@@ -7,6 +7,7 @@ import { socialMediaGetters } from "@/store/socialMedia/socialMediaGetters";
 import { footerMenu } from "@/store/footerMenu/index";
 import { footerGetters } from "@/store/footerMenu/footerGetters";
 import { hotel } from "@/store/hotel/index";
+import { hotelGetters } from "@/store/hotel/hotelGetters";
 
 import Footer from "./Footer.vue";
 
@@ -30,6 +31,7 @@ describe("Footer.vue", () => {
         socialMedia: socialMedia.state().socialMedia,
       },
       getters: {
+        getHotelData: hotelGetters.getHotelData,
         getFooterMenu: footerGetters.getFooterMenu,
         getSocialMedia: socialMediaGetters.getSocialMedia,
       },
