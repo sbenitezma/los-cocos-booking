@@ -1,29 +1,49 @@
 <template>
   <div>
     <ProgressCircular v-if="loading.info" :value="loading.info" />
-    <v-toolbar v-else color="#FFFFFF" flat height="50" max-width="100%">
+    <v-toolbar
+      v-else
+      :class="{
+        'justify-content': $vuetify.breakpoint.smAndUp,
+      }"
+      color="#FFFFFF"
+      flat
+      height="50"
+      max-width="100%"
+    >
       <v-app-bar-nav-icon
         class="hidden-md-and-up mt-1"
         @click.stop="drawer = !drawer"
       ></v-app-bar-nav-icon>
       <v-toolbar-items
+        v-for="(menu, index) in menuItems"
         class="hidden-md-and-down"
-        v-for="menu in menuItems"
-        :key="menu"
+        :key="menu.name"
       >
         <v-img
-          contain
-          class="mr-5 ml-10"
           v-if="!menu.name"
-          min-width="100px"
           alt="LosCocosLogo"
+          class="mr-10 ml-12 mt-1"
+          contain
           id="LosCocosLogo"
+          min-width="100px"
           :src="getIcon('los-cocos-logo.svg')"
         >
         </v-img>
-        <v-btn text v-else class="text-capitalize headline-1">{{
-          menu.name
-        }}</v-btn>
+        <v-btn
+          v-else
+          :class="[
+            index === 0
+              ? 'ml-12 pl-12'
+              : index === menuItems.length - 1
+              ? 'mr-12 pr-12'
+              : '',
+          ]"
+          class="text-capitalize headline-1"
+          text
+          :to="menu.path"
+          >{{ menu.name }}</v-btn
+        >
       </v-toolbar-items>
     </v-toolbar>
 
@@ -31,8 +51,8 @@
       <v-list nav dense>
         <v-list-item
           color="#FFFFFF"
-          v-for="(item, index) in menuItems"
-          :key="index"
+          v-for="item in menuItems"
+          :key="item.name"
           :to="item.path"
           link
         >
@@ -40,11 +60,11 @@
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-icon>
           <v-img
-            contain
             v-if="!item.name"
-            min-width="50px"
             alt="LosCocosLogo"
+            contain
             id="LosCocosLogoMobile"
+            min-width="50px"
             :src="getIcon('los-cocos-logo.svg')"
           >
           </v-img>
@@ -67,7 +87,7 @@ export default {
     ProgressCircular,
   },
   computed: {
-    ...mapState(["loading", "currentUser"]),
+    ...mapState(["loading"]),
   },
   data: () => ({
     drawer: false,
@@ -106,7 +126,7 @@ export default {
       if (appIcon) {
         return appIcon;
       } else {
-        return `https://source.unsplash.com/collection/3727392/300x300?sig=${100}`;
+        return `https://source.unsplash.com/collection/3727392/25x25?sig=${100}`;
       }
     },
     /**

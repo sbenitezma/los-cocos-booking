@@ -2,6 +2,7 @@
 @import "./variables";
 @import "./mixins";
 @import "./typography";
+@import "../../components/Datepicker/datepicker.scss";
 
 html,
 body,
@@ -13,8 +14,22 @@ body,
   }
   font-family: $body-font-family, sans-serif !important;
 
-  .v-toolbar__content,
-  .v-toolbar__extension {
-    justify-content: space-around !important;
+  .justify-content {
+    .v-toolbar__content,
+    .v-toolbar__extension {
+      justify-content: space-around !important;
+    }
+  }
+  .rrss {
+    @include footer-image($footer-images-url, -385px, -16px, 50px, 55px);
+  }
+  .facebook {
+    @include footer-image($footer-images-url, -458px, -16px, 50px, 55px);
+  }
+  .instagram {
+    @include footer-image($footer-images-url, -532px, center, 55px, 55px);
+  }
+  .twitter {
+    @include footer-image($footer-images-url, right, center, 50px, 55px);
   }
 }

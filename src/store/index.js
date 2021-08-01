@@ -8,7 +8,7 @@ Vue.use(Vuex);
 
 export const state = {
   hotel: {
-    info: {},
+    data: {},
     rooms: [],
   },
   loading: {

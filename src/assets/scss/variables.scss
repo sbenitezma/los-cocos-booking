@@ -3,15 +3,16 @@
 // All variable changes need to happen before @import
 $body-font-family: 'Tajawal', sans-serif;
 $heading-font-family: $body-font-family;
-$defaultColor: #01FFF7;
+$defaultColor: #165086;
+$footer-images-url: '../../assets/icons/footer/footer_icons.png';
 
 // Setup theme colors
 $theme-colors: (
-        'primary': #1463b0,
+        'primary': #165086,
         'accent': #A5ABBD,
         'secondary': #5f5e5d,
         'success': #00B697,
-        'info': #008CCB,
+        'info': #2078cf,
         'warning': #D8A31A,
         'error': #B63120,
         'white': #E6F4F1,

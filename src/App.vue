@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-main class="grey lighten-3">
+    <v-main>
       <v-row>
         <v-col
           cols="12"
@@ -12,7 +12,7 @@
           offset-lg="2"
         >
           <Navbar />
-          <v-container fluid>
+          <v-container fluid class="pa-0">
             <v-row>
               <v-col cols="12" md="12" lg="12" sm="12" xs="12">
                 <router-view :key="$route.path"></router-view>
