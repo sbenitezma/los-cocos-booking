@@ -1,5 +1,5 @@
 <template>
-  <v-footer color="#FFFFFF" fixed padless height="50">
+  <v-footer color="#FFFFFF" fixed padless height="50" data-cy="footer">
     <v-row>
       <v-col cols="12" md="8" lg="8" sm="12" xs="12" offset="2">
         <v-toolbar flat tile>

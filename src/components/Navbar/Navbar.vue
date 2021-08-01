@@ -7,6 +7,7 @@
         'justify-content': $vuetify.breakpoint.smAndUp,
       }"
       color="#FFFFFF"
+      data-cy="navbar"
       flat
       height="50"
       max-width="100%"

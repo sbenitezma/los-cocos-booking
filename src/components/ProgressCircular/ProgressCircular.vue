@@ -1,9 +1,10 @@
 <template>
   <v-overlay :value="value" opacity="0.1" absolute>
     <v-progress-circular
+      :color="color"
+      data-cy="progress-circular"
       indeterminate
       :size="size"
-      :color="color"
     ></v-progress-circular>
   </v-overlay>
 </template>
