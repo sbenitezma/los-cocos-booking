@@ -6,11 +6,10 @@ import { mutations } from "./mutations";
 
 Vue.use(Vuex);
 
-
 export const state = {
   hotel: {
-    info: {},
-    rooms: []
+    data: {},
+    rooms: [],
   },
   loading: {
     booking: true,

@@ -16,4 +16,12 @@ export const mutations = {
     state.hotel = hotel;
     state.loading.info = false;
   },
+  /**
+   *
+   * @param state
+   */
+  refreshHotelPage(state) {
+    state.loading.info = true;
+    state.loading.info = false;
+  },
 };

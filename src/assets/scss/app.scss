@@ -1,29 +1,35 @@
+@import '~vuetify/src/styles/settings/_variables.scss';
 @import "./variables";
 @import "./mixins";
 @import "./typography";
+@import "../../components/Datepicker/datepicker.scss";
 
-//specificity needs to be taken into consideration for some components
-//because !important has been assigned to their css
-//https://dev.to/emmabostian/css-specificity-1kca
 html,
 body,
 .v-application {
-  font-family: $body-font-family;
-}
-//Added all typography helper classes because of css specificity override
-//https://vuetifyjs.com/en/styles/typography#typography
-.v-application {
-  .title,
   .headline,
-  .body,
-  {
-    font-family: $body-font-family;
+  .title,
+  [class*='text-'] {
+    font-family: $body-font-family, sans-serif !important;
+  }
+  font-family: $body-font-family, sans-serif !important;
+
+  .justify-content {
+    .v-toolbar__content,
+    .v-toolbar__extension {
+      justify-content: space-around !important;
+    }
+  }
+  .rrss {
+    @include footer-image($footer-images-url, -385px, -16px, 50px, 55px);
+  }
+  .facebook {
+    @include footer-image($footer-images-url, -458px, -16px, 50px, 55px);
+  }
+  .instagram {
+    @include footer-image($footer-images-url, -532px, center, 55px, 55px);
+  }
+  .twitter {
+    @include footer-image($footer-images-url, right, center, 50px, 55px);
   }
 }
-.v-input__prepend-inner {
-  margin-top: 0 !important;
-}
-.custom-icon {
-  float: left;
-}
-@import '~vuetify/src/styles/settings/_variables.scss';

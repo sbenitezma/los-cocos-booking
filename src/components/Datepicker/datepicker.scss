@@ -1,0 +1,215 @@
+
+.v-picker {
+  &__field {
+    width: 296px;
+
+    .v-input {
+      &__control {
+        .v-icon__component {
+          div {
+            float: right;
+
+            svg use {
+              fill: $tertiary;
+            }
+          }
+        }
+      }
+    }
+
+    &.v-input--is-focused {
+      .v-input {
+        &__control {
+          .v-icon__component {
+            div {
+              float: right;
+
+              svg use {
+                fill: $primary;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &__calendar {
+    min-height: 424px;
+    padding: 24px 0;
+  }
+
+  &__body,
+  &__body--no-title {
+    margin: 0;
+  }
+
+  &__actions {
+    padding: 24px 24px 0;
+    justify-content: space-between;
+
+    .v-btn {
+      width: 100%;
+    }
+  }
+}
+
+.v-date-picker-header,
+.v-date-picker-table {
+  height: auto;
+  padding: 0 24px;
+}
+
+.v-date-picker-header {
+  margin-bottom: 16px;
+
+  svg {
+    width: 24px;
+    height: 24px;
+
+    use {
+      fill: $tertiary;
+    }
+  }
+
+  &__value {
+    button {
+      /**
+        Settings: $color, $fontSize, $fontWeight, $left, $letterSpacing, $lineHeight, $padding, $position, $textAlign, $top
+      */
+      @include componentSettings(
+        $tertiary,
+        17px,
+        600,
+        auto,
+        -0.25px,
+        1,
+        0px,
+        initial,
+        center,
+        unset
+      );
+    }
+
+    &--disabled {
+      button {
+        color: $tertiary;
+      }
+    }
+  }
+
+  &--disabled {
+    .v-btn__content {
+      .v-icon {
+        use {
+          fill: $tertiary;
+        }
+      }
+    }
+  }
+}
+
+.v-date-picker-table {
+  table {
+    border-color: $white;
+  }
+
+  th {
+    height: 32px;
+    width: 32px;
+    @include componentSettings(
+      $tertiary,
+      13px,
+      400,
+      auto,
+      unset,
+      20.8px,
+      0 0 8px 0,
+      initial,
+      center,
+      unset
+    );
+  }
+
+  &__current {
+    border: 1px solid $primary;
+
+    &.secondary--text {
+      border: 1px solid $secondary;
+    }
+
+    &.tertiary--text {
+      border: 1px solid $tertiary;
+    }
+
+    &.info--text {
+      border: 1px solid $info;
+    }
+
+    &.success--text {
+      border: 1px solid $success;
+    }
+
+    &.warning--text {
+      border: 1px solid $warning;
+    }
+
+    &.error--text {
+      border: 1px solid $error;
+    }
+
+    &.disabled--text {
+      border: 1px solid $tertiary;
+    }
+  }
+
+  .v-btn {
+    border-radius: 3px;
+    font-size: 13px;
+
+    &.v-btn--disabled {
+      color: $tertiary !important;
+
+      &.accent {
+        color: $white;
+        background-color: $tertiary !important;
+      }
+    }
+  }
+
+  .v-btn:not(.v-btn--disabled) {
+    @include componentSettings(
+      $tertiary,
+      13px,
+      400,
+      auto,
+      unset,
+      1,
+      0,
+      initial,
+      center,
+      unset
+    );
+  }
+
+  .v-btn:not(.v-btn--outlined).accent,
+  .v-btn:not(.v-btn--outlined).error,
+  .v-btn:not(.v-btn--outlined).info,
+  .v-btn:not(.v-btn--outlined).primary,
+  .v-btn:not(.v-btn--outlined).secondary,
+  .v-btn:not(.v-btn--outlined).success,
+  .v-btn:not(.v-btn--outlined).warning {
+    @include componentSettings(
+      $white,
+      13px,
+      400,
+      auto,
+      unset,
+      1,
+      0,
+      initial,
+      center,
+      unset
+    );
+  }
+}
