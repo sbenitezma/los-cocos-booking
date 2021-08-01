@@ -4,9 +4,8 @@
     <v-toolbar
       v-else
       :class="{
-        'justify-content': $vuetify.breakpoint.smAndUp,
+        'justify-content': $vuetify.breakpoint.mdAndUp,
       }"
-      color="#FFFFFF"
       data-cy="navbar"
       flat
       height="50"
@@ -28,7 +27,7 @@
           contain
           id="LosCocosLogo"
           min-width="100px"
-          :src="getIcon('los-cocos-logo.svg')"
+          :src="getLogo('los-cocos-logo.svg')"
         >
         </v-img>
         <v-btn
@@ -51,7 +50,6 @@
     <v-navigation-drawer v-model="drawer" absolute>
       <v-list nav dense>
         <v-list-item
-          color="#FFFFFF"
           v-for="item in menuItems"
           :key="item.name"
           :to="item.path"
@@ -66,7 +64,7 @@
             contain
             id="LosCocosLogoMobile"
             min-width="50px"
-            :src="getIcon('los-cocos-logo.svg')"
+            :src="getLogo('los-cocos-logo.svg')"
           >
           </v-img>
           <v-list-item-title v-if="item.name">{{
@@ -78,7 +76,7 @@
   </div>
 </template>
 <script>
-import { mapState } from "vuex";
+import { mapGetters } from "vuex";
 
 import ProgressCircular from "@/components/ProgressCircular/ProgressCircular";
 
@@ -88,53 +86,27 @@ export default {
     ProgressCircular,
   },
   computed: {
-    ...mapState(["loading"]),
+    ...mapGetters({
+      loading: "getLoading",
+      menuItems: "getHeaderMenu",
+    }),
   },
   data: () => ({
     drawer: false,
-    group: null,
-    menuItems: [
-      { icon: "mdi-home", name: "Home", path: "/" },
-      { icon: "mdi-bed-king-outline", name: "Rooms", path: "/rooms" },
-      {
-        icon: "mdi-silverware-fork-knife",
-        name: "Restaurant",
-        path: "/restaurant",
-      },
-      {
-        icon: "los-cocos-logo.svg",
-        name: false,
-        path: "/#",
-      },
-      { icon: "mdi-party-popper", name: "Weedings", path: "/weedings" },
-      { icon: "mdi-account-group", name: "Membership", path: "/membership" },
-      { icon: "mdi-deskphone", name: "Contact", path: "/contact" },
-    ],
   }),
-  watch: {
-    group() {
-      this.drawer = false;
-    },
-  },
   methods: {
     /**
      * Get Custom icon by name
      * @param name
      * @returns {string|*}
      */
-    getIcon(name) {
-      let appIcon = require(`@/assets/icons/${name}`);
+    getLogo(name) {
+      let appIcon = require(`@/assets/images/logo/${name}`);
       if (appIcon) {
         return appIcon;
       } else {
         return `https://source.unsplash.com/collection/3727392/25x25?sig=${100}`;
       }
-    },
-    /**
-     * Emit custom action to parent component (active/favourite)
-     */
-    setAction() {
-      this.$emit("clickAction");
     },
   },
 };

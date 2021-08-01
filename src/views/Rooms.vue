@@ -36,12 +36,12 @@
         <h2>Rooms & Rates</h2>
         <p>Plan your perfect stay at our hotel</p>
         <v-img
-          class="pt-4 pb-2 ml-2 mr-2"
+          class="pt-4 pb-2 ml-0 pl-0 mr-2"
           contain
-          max-width="400px"
+          max-width="450px"
           alt="BookingSteps"
           id="BookingSteps"
-          :src="require('@/assets/images/los-cocos-1.png')"
+          :src="require('@/assets/images/booking/los-cocos-1.svg')"
         >
         </v-img>
       </v-col>

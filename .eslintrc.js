@@ -17,6 +17,7 @@ module.exports = {
         "**/__tests__/*.{j,t}s?(x)",
         "**/tests/unit/**/*.spec.{j,t}s?(x)",
         "**/src/components/**/*.spec.{j,t}s?(x)",
+        "**/src/store/**/*.spec.{j,t}s?(x)",
       ],
       env: {
         jest: true,
