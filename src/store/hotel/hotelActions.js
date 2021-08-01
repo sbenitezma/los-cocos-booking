@@ -1,5 +1,6 @@
 import db from "@/api/db/hotel.json";
-export const actions = {
+
+export const hotelActions = {
   /**
    * Load Hotel API info
    * @param commit
@@ -9,7 +10,7 @@ export const actions = {
   async LOAD_HOTEL({ commit }) {
     if (db) {
       commit("setHotelInfo", db);
-      commit("refreshHotelPage");
+      commit("refreshPageInfo");
     }
   },
 };

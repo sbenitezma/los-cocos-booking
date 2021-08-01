@@ -5,5 +5,6 @@ module.exports = {
     "**/tests/unit/**/*.spec.[jt]s?(x)",
     "**/__tests__/*.[jt]s?(x)",
     "**/src/components/**/*.spec.[jt]s?(x)",
+    "**/src/store/**/*.spec.[jt]s?(x)",
   ],
 };

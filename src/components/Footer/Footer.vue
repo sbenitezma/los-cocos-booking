@@ -1,5 +1,5 @@
 <template>
-  <v-footer color="#FFFFFF" fixed padless height="50" data-cy="footer">
+  <v-footer color="white" fixed padless height="50" data-cy="footer">
     <v-row>
       <v-col cols="12" md="8" lg="8" sm="12" xs="12" offset="2">
         <v-toolbar flat tile>
@@ -14,7 +14,6 @@
           </v-img>
           <v-toolbar-items
             class="mb-2"
-            color="#FFFFFF"
             v-for="item in footerMenu"
             :key="item.path"
           >
@@ -29,16 +28,16 @@
           </v-toolbar-items>
           <v-spacer></v-spacer>
           <v-btn
-            v-if="hotel.data"
+            v-if="hotelData"
             class="ma-0 pa-0 mr-4 mb-2 footline-1"
-            :href="`mailto:${hotel.data.email}`"
+            :href="`mailto:${hotelData.email}`"
             target="_blank"
             text
           >
-            {{ hotel.data.email }}
+            {{ hotelData.email }}
           </v-btn>
-          <span v-if="hotel.data" class="ma-0 pa-0 mb-2 mr-4 footline-2">
-            Tlf: {{ hotel.data.phone }}
+          <span v-if="hotelData" class="ma-0 pa-0 mb-2 mr-4 footline-2">
+            Tlf: {{ hotelData.phone }}
           </span>
           <v-btn
             v-for="(icon, index) in socialMedia"
@@ -58,31 +57,16 @@
   </v-footer>
 </template>
 <script>
-import { mapState } from "vuex";
+import { mapGetters, mapState } from "vuex";
 
 export default {
   computed: {
     ...mapState(["hotel"]),
+    ...mapGetters({
+      hotelData: "getHotelData",
+      footerMenu: "getFooterMenu",
+      socialMedia: "getSocialMedia",
+    }),
   },
-  data: () => ({
-    footerMenu: [
-      { name: "Terms and Conditions", path: "/terms-and-conditions" },
-      { name: "Privacy Policy", path: "/privacy-policy" },
-      { name: "About us", path: "/about-us" },
-      { name: "Partners", path: "/partners" },
-    ],
-    socialMedia: [
-      { name: "rrss", url: "http://hotelloscocos.com.mx/es/feed" },
-      {
-        name: "facebook",
-        url: "https://www.facebook.com/hotelloscocoschetumal",
-      },
-      {
-        name: "instagram",
-        url: "https://www.facebook.com/hotelloscocoschetumal",
-      },
-      { name: "twitter", url: "https://twitter.com/hotelloscocos" },
-    ],
-  }),
 };
 </script>

@@ -3,7 +3,7 @@
     <v-row class="text-center">
       <v-col cols="12">
         <v-img
-          :src="require('../assets/icons/los-cocos-logo.svg')"
+          :src="require('../assets/images/logo/los-cocos-logo.svg')"
           class="my-3"
           contain
           height="200"

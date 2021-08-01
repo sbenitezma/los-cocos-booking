@@ -1,25 +1,19 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import { getters } from "./getters";
-import { actions } from "./actions";
-import { mutations } from "./mutations";
+import { app } from "./app/index";
+import { navMenu } from "./headerMenu/index";
+import { hotel } from "./hotel/index";
+import { footerMenu } from "./footerMenu/index";
+import { socialMedia } from "./socialMedia/index";
 
 Vue.use(Vuex);
 
-export const state = {
-  hotel: {
-    data: {},
-    rooms: [],
-  },
-  loading: {
-    booking: true,
-    info: true,
-  },
-};
-
 export default new Vuex.Store({
-  state,
-  getters,
-  mutations,
-  actions,
+  modules: {
+    hotel: hotel,
+    app: app,
+    navMenu: navMenu,
+    footerMenu: footerMenu,
+    socialMedia: socialMedia,
+  },
 });

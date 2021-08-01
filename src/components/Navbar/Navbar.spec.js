@@ -2,12 +2,14 @@ import { createLocalVue, shallowMount } from "@vue/test-utils";
 import Vuex from "vuex";
 import Vuetify from "vuetify";
 import VueRouter from "vue-router";
+import { app } from "@/store/app/index";
+import { appGetters } from "@/store/app/appGetters";
+import { headerGetters } from "@/store/headerMenu/headerGetters";
 
 import Navbar from "./Navbar.vue";
 
 describe("Navbar.vue", () => {
   const localVue = createLocalVue();
-  let state;
   let router;
   let store;
   let vuetify;
@@ -19,13 +21,14 @@ describe("Navbar.vue", () => {
   localVue.use(VueRouter);
 
   beforeEach(() => {
-    state = {
-      loading: {
-        info: false,
-      },
-    };
     store = new Vuex.Store({
-      state,
+      state: {
+        loading: app.state().loading,
+      },
+      getters: {
+        getLoading: appGetters.getLoading,
+        getHeaderMenu: headerGetters.getHeaderMenu,
+      },
     });
   });
 

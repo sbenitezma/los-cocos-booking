@@ -1,5 +1,5 @@
 <template>
-  <v-overlay :value="value" opacity="0.1" absolute>
+  <v-overlay :value="value" opacity="0.5" absolute>
     <v-progress-circular
       :color="color"
       data-cy="progress-circular"

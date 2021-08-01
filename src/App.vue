@@ -27,8 +27,6 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
-
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 
@@ -43,15 +41,17 @@ export default {
     // already being observed
     this.fetchHotelInfo();
   },
-  data: () => ({
-    tab: null,
-  }),
-  computed: {
-    ...mapState(["loading"]),
-  },
   methods: {
     async fetchHotelInfo() {
+      await this.$store.dispatch("setLoading", {
+        section: "info",
+        value: true,
+      });
       await this.$store.dispatch("LOAD_HOTEL");
+      await this.$store.dispatch("setLoading", {
+        section: "info",
+        value: false,
+      });
     },
   },
 };
