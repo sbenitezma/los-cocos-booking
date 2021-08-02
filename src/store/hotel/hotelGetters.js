@@ -11,4 +11,7 @@ export const hotelGetters = {
   getHotelRooms: (state) => {
     return state.rooms;
   },
+  getBookingInfo: (state) => {
+    return state.booking;
+  },
 };

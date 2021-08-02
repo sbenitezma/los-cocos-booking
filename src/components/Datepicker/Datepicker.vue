@@ -2,6 +2,9 @@
 // =============================================================================
 // DATEPICKER
 // =============================================================================
+.v-text-field {
+  max-width: 150px;
+}
 </style>
 <template>
   <v-menu
@@ -20,6 +23,7 @@
         aria-label="book-in"
         background-color="white"
         clear-icon="$vuetify.icons.big"
+        :height="45"
         dense
         outlined
         persistent-hint
@@ -29,7 +33,6 @@
       ></v-text-field>
     </template>
     <v-date-picker
-      class="v-picker__calendar"
       v-model="date"
       show-current
       elevation="1"
