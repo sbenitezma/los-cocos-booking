@@ -5,7 +5,7 @@
         Reservation Summary
       </v-card-title>
       <v-card-subtitle class="title-1 pt-2 pb-4">
-        Mini Dreamy Room
+        {{ bookingInfo.roomName }} {{ bookingInfo.roomType }}
       </v-card-subtitle>
       <v-card-text>
         <v-row no-gutters>
@@ -17,24 +17,37 @@
                     <div>
                       <span class="subheading-3">Check in</span>
                       <v-spacer />
-                      <span class="body">From</span>
+                      <span class="body">
+                        From {{ bookingInfo.checkInTime }}
+                      </span>
                     </div>
                     <div class="pt-4">
                       <span class="subheading-3">Reservation Date</span>
                       <v-spacer />
-                      <span class="body">From llalalala</span>
+                      <span class="body">
+                        From {{ bookingInfo.checkInDate }} to
+                        {{ bookingInfo.checkOutDate }}
+                      </span>
                     </div>
                     <div class="pt-4">
                       <span class="subheading-3">People</span>
                       <v-spacer />
-                      <span class="body">Adults</span>
+                      <span class="body">
+                        Adults: {{ bookingInfo.adultsOccupancy }}
+                      </span>
+                      <v-spacer />
+                      <span class="body">
+                        Children: {{ bookingInfo.childrenOccupancy }}
+                      </span>
                     </div>
                   </v-col>
                   <v-col cols="6" md="6" xs="12">
                     <div>
                       <span class="subheading-3">Check out</span>
                       <v-spacer />
-                      <span class="body">From</span>
+                      <span class="body">
+                        To {{ bookingInfo.checkOutTime }}
+                      </span>
                       <v-spacer />
                     </div>
                   </v-col>
@@ -54,8 +67,22 @@
           </v-col>
           <v-col cols="2" lg="2" md="2" sm="12">
             <div class="mt-0 pt-4 mb-6 subheading-2 float-right">
-              <span>Total</span>
+              <span>€{{ bookingInfo.totalPrice }}</span>
             </div>
+          </v-col>
+          <v-col cols="12" lg="12" md="12" class="text-center">
+            <v-btn
+              :disabled="getDisabledBooking"
+              block
+              class="px-12"
+              color="primary"
+              elevation="2"
+              tile
+              large
+              @click="finishBooking()"
+            >
+              <span class="btn-text">Save</span>
+            </v-btn>
           </v-col>
         </v-row>
       </v-card-actions>
@@ -69,25 +96,31 @@ export default {
   computed: {
     ...mapState(["hotel", "booking"]),
     ...mapGetters({
+      hotelRoom: "getRoomById",
       bookingInfo: "getBookingInfo",
     }),
+    getDisabledBooking() {
+      const room = this.hotelRoom(this.bookingInfo?.roomId);
+      if (room) {
+        if (
+          room.occupancy >=
+            this.bookingInfo.adultsOccupancy +
+              this.bookingInfo.childrenOccupancy &&
+          this.bookingInfo.adultsOccupancy > 0 &&
+          this.bookingInfo.childrenOccupancy > 0
+        )
+          return false;
+      }
+      return true;
+    },
   },
   methods: {
     /**
-     * Get Custom icon by name
-     * @param name
+     * Finish booking action
      * @returns {string|*}
      */
-    getRoomPhoto(name) {
-      let appIcon = require(`@/assets/images/hotel/${name}.png`);
-      if (appIcon) {
-        return appIcon;
-      } else {
-        return `https://source.unsplash.com/collection/3727392/25x25?sig=${100}`;
-      }
-    },
-    selectRoom(room) {
-      console.log(room);
+    finishBooking() {
+      console.log("finish booking");
     },
   },
 };

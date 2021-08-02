@@ -23,6 +23,9 @@ body,
       justify-content: space-around !important;
     }
   }
+  .btn-text {
+    text-transform: capitalize;
+  }
   .rrss {
     @include footer-image($footer-images-url, -385px, -16px, 50px, 55px);
   }

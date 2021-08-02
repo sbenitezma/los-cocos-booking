@@ -6,9 +6,6 @@
   width: 100%;
   height: 80px;
 }
-.btn-text {
-  text-transform: capitalize;
-}
 </style>
 <template>
   <v-toolbar class="justify-content" flat height="115" max-width="100%">
@@ -120,9 +117,6 @@ export default {
       } else {
         return `https://source.unsplash.com/collection/3727392/25x25?sig=${100}`;
       }
-    },
-    selectRoom(room) {
-      console.log(room);
     },
     setBooking() {
       console.log("booking");

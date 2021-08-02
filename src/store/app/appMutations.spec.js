@@ -14,14 +14,4 @@ describe("App store mutations", () => {
     expect(state.loading).toBeTruthy();
     expect(state.loading.info).toBe(loading.info);
   });
-
-  it("Test refreshPageInfo", () => {
-    const loading = {
-      info: true,
-    };
-    const state = { loading };
-    appMutations.refreshPageInfo(state);
-    expect(state.loading).toBeTruthy();
-    expect(state.loading.info).toBe(loading.info);
-  });
 });

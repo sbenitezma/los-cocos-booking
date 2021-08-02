@@ -1,11 +1,11 @@
 <template>
   <v-col cols="6" lg="6" md="6" sm="12" xs="12" offset="1">
-    <v-row no-gutters v-for="room in hotelRooms" v-bind:key="room">
+    <v-row no-gutters v-for="room in hotelRooms" v-bind:key="room.name">
       <v-col cols="12" lg="12" md="12">
         <v-hover v-slot:default="{ hover }">
           <v-card
             append
-            :elevation="hover ? 3 : 0"
+            :elevation="hover || bookingInfo.roomName === room.name ? 3 : 0"
             class="v-card--small pa-4 pr-0"
             exact
             :max-height="230"
@@ -20,7 +20,6 @@
                   :height="190"
                   :width="230"
                   :src="getRoomPhoto(room.thumbnail)"
-                  :type="type"
                 />
               </v-col>
               <v-col cols="8" class="d-flex flex-column ma-0 pa-0">
@@ -53,7 +52,6 @@
                           :height="20"
                           :width="30"
                           :src="require('@/assets/icons/hotel/double-bed.svg')"
-                          :type="type"
                         />
                         <span>Beds: {{ room.numberOfBeds }}</span>
                         <span class="ml-12">
@@ -82,6 +80,7 @@ export default {
     ...mapState(["hotel", "booking"]),
     ...mapGetters({
       hotelRooms: "getHotelRooms",
+      bookingInfo: "getBookingInfo",
     }),
   },
   methods: {
@@ -98,8 +97,20 @@ export default {
         return `https://source.unsplash.com/collection/3727392/25x25?sig=${100}`;
       }
     },
+    /**
+     * Select room to book
+     * @param room
+     */
     selectRoom(room) {
-      console.log(room);
+      this.$store.dispatch("setLoading", {
+        section: "info",
+        value: true,
+      });
+      this.$store.dispatch("setBookingRoom", room);
+      this.$store.dispatch("setLoading", {
+        section: "info",
+        value: false,
+      });
     },
   },
 };
