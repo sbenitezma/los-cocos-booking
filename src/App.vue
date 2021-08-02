@@ -12,7 +12,7 @@
           offset-lg="2"
         >
           <Navbar />
-          <v-container fluid class="pa-0">
+          <v-container fluid class="pt-0 pb-12 mb-12">
             <v-row>
               <v-col cols="12" md="12" lg="12" sm="12" xs="12">
                 <router-view :key="$route.path"></router-view>
