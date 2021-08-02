@@ -14,7 +14,6 @@
   <div class="booking-form">
     <v-toolbar class="justify-content" flat height="115" max-width="100%">
       <v-img
-        color="black"
         class="mt-6"
         contain
         max-width="103%"
@@ -66,12 +65,13 @@
             <v-hover v-slot:default="{ hover }">
               <v-card
                 append
-                :elevation="hover ? 1 : 0"
+                :elevation="hover ? 3 : 0"
                 class="v-card--small pa-4 pr-0"
                 exact
                 :max-height="215"
                 :max-width="590"
                 outlined
+                @click="selectRoom(room)"
               >
                 <v-row no-gutters>
                   <v-col cols="4">
@@ -197,6 +197,9 @@ export default {
       } else {
         return `https://source.unsplash.com/collection/3727392/25x25?sig=${100}`;
       }
+    },
+    selectRoom(room) {
+      console.log(room);
     },
   },
 };
