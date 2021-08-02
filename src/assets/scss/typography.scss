@@ -1,26 +1,27 @@
 // Navigation items
 .headline-1 {
-  @include font-style(color('secondary'), 14px, 600, 14px, 0);
+  @include font-style(color('secondary'), 13px, 600, 13px, 0);
 }
+// Footer email
 .footline-1 {
-  @include font-style(color('primary'), 14px, 500, 14px, 0);
+  @include font-style(color('primary'), 13px, 600, 13px, 0);
   text-transform: lowercase !important;
 }
+// Footer fonts
 .footline-2 {
-  @include font-style(color('primary'), 14px, 500, 14px, 0);
+  @include font-style(color('primary'), 13px, 600, 13px, 0);
 }
+// Room name font
 .title-1 {
-  @include font-style(color('tertiary'), 20px, 900, 28.8px);
+  @include font-style(color('tertiary'), 18px, 600, 18px, 0);
 }
-// Section Title
+// Room section font
 .subheading {
-  @include font-style(color('secondary'), 18px, 700, 18px);
+  @include font-style(color('tertiary'), 12px, 500, 12px);
 }
-// Navbar name + lastname
+// Room Price font
 .subheading-1 {
-  @include font-style(color('secondary'), 18px, 700, 18px);
-  text-transform: capitalize;
-  word-spacing: 0;
+  @include font-style(color('tertiary'), 18px, 700, 18px, 0);
 }
 // Navbar username
 .subheading-2 {
@@ -30,5 +31,5 @@
 }
 // Body text
 .body {
-  @include font-style(color('tertiary'), 15px, 300, 24px);
+  @include font-style(color('tertiary'), 16px, 500, 16px);
 }

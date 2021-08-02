@@ -25,10 +25,6 @@
           This is a webpage created by Sonia BM
         </h2>
       </v-col>
-
-      <v-col class="mb-5" cols="12">
-        <h2 class="headline font-weight-bold mb-3">About me</h2>
-      </v-col>
     </v-row>
   </v-container>
 </template>

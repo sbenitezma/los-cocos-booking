@@ -2,7 +2,6 @@
 @import "./variables";
 @import "./mixins";
 @import "./typography";
-@import "../../components/Datepicker/datepicker.scss";
 
 html,
 body,
@@ -10,10 +9,9 @@ body,
   .headline,
   .title,
   [class*='text-'] {
-    font-family: $body-font-family, sans-serif !important;
+    font-family: $body-font-family !important;
   }
-  font-family: $body-font-family, sans-serif !important;
-
+  font-family: $body-font-family !important;
   .justify-content {
     .v-toolbar__content,
     .v-toolbar__extension {

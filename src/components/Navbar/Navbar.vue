@@ -6,6 +6,7 @@
       :class="{
         'justify-content': $vuetify.breakpoint.mdAndUp,
       }"
+      class="mx-12 px-12"
       data-cy="navbar"
       flat
       height="50"
@@ -34,9 +35,9 @@
           v-else
           :class="[
             index === 0
-              ? 'ml-12 pl-12'
+              ? 'ml-12'
               : index === menuItems.length - 1
-              ? 'mr-12 pr-12'
+              ? 'mr-12'
               : '',
           ]"
           class="text-capitalize headline-1"
