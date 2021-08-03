@@ -18,7 +18,7 @@
       ></v-app-bar-nav-icon>
       <v-toolbar-items
         v-for="(menu, index) in menuItems"
-        class="hidden-md-and-down"
+        class="hidden-sm-and-down"
         :key="menu.name"
       >
         <v-img
@@ -26,6 +26,7 @@
           alt="LosCocosLogo"
           class="mr-10 ml-12 mt-1"
           contain
+          data-cy="los-cocos-logo"
           id="LosCocosLogo"
           min-width="100px"
           :src="getLogo('los-cocos-logo.svg')"
