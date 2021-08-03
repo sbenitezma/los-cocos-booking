@@ -1,11 +1,21 @@
 <template>
   <v-col cols="5" lg="5" md="5" sm="12" xs="12">
-    <v-card append class="v-card--small pa-4" exact outlined>
-      <v-card-title class="mt-0 pt-2 mb-6 subheading-2">
+    <v-card
+      append
+      class="v-card--small pa-4"
+      data-cy="booking-summary"
+      exact
+      outlined
+    >
+      <v-card-title
+        class="mt-0 pt-2 mb-6 subheading-2"
+        data-cy="booking-summary-title"
+      >
         Reservation Summary
       </v-card-title>
-      <v-card-subtitle class="title-1 pt-2 pb-4">
-        {{ bookingInfo.roomName }} {{ bookingInfo.roomType }}
+      <v-card-subtitle class="title-1 pt-2 pb-4" data-cy="booking-room">
+        <span data-cy="booking-room-name"> {{ bookingInfo.roomName }} </span>
+        <span data-cy="booking-room-type"> {{ bookingInfo.roomType }} </span>
       </v-card-subtitle>
       <v-card-text>
         <v-row no-gutters>
@@ -17,7 +27,7 @@
                     <div>
                       <span class="subheading-3">Check in</span>
                       <v-spacer />
-                      <span class="body">
+                      <span class="body" data-cy="booking-summary-checkInTime">
                         From {{ bookingInfo.checkInTime }}
                       </span>
                     </div>
@@ -26,7 +36,7 @@
                     <div>
                       <span class="subheading-3">Check out</span>
                       <v-spacer />
-                      <span class="body">
+                      <span class="body" data-cy="booking-summary-checkOutTime">
                         To {{ bookingInfo.checkOutTime }}
                       </span>
                       <v-spacer />
@@ -34,21 +44,33 @@
                   </v-col>
                 </v-row>
                 <v-row no-gutters>
-                  <v-col cols="12" md="12" xs="12" class="pt-4">
+                  <v-col
+                    cols="12"
+                    md="12"
+                    xs="12"
+                    class="pt-4"
+                    data-cy="booking-reservation-date"
+                  >
                     <span class="subheading-3">Reservation Date</span>
                     <v-spacer />
                     <span class="body">
-                      From {{ parseDate(bookingInfo.checkInDate) }} to
-                      {{ parseDate(bookingInfo.checkOutDate) }}
+                      From
+                      <span data-cy="booking-checkInDate">
+                        {{ parseDate(bookingInfo.checkInDate) }}
+                      </span>
+                      to
+                      <span data-cy="booking-checkOutDate">
+                        {{ parseDate(bookingInfo.checkOutDate) }}</span
+                      >
                     </span>
-                    <div class="pt-4">
+                    <div class="pt-4" data-cy="booking-occupancy">
                       <span class="subheading-3">People</span>
                       <v-spacer />
-                      <span class="body">
+                      <span class="body" data-cy="booking-adultsOccupancy">
                         Adults: {{ bookingInfo.adultsOccupancy }}
                       </span>
                       <v-spacer />
-                      <span class="body">
+                      <span class="body" data-cy="booking-childrenOccupancy">
                         Children: {{ bookingInfo.childrenOccupancy }}
                       </span>
                     </div>
@@ -63,12 +85,15 @@
       <v-card-actions>
         <v-row no-gutters>
           <v-col cols="10" lg="10" md="10" sm="12">
-            <div class="mt-0 pt-4 mb-6 subheading-2">
+            <div class="mt-0 pt-4 mb-6 subheading-2" data-cy="booking-total">
               <span>Total</span>
             </div>
           </v-col>
           <v-col cols="2" lg="2" md="2" sm="12">
-            <div class="mt-0 pt-4 mb-6 subheading-2 float-right">
+            <div
+              class="mt-0 pt-4 mb-6 subheading-2 float-right"
+              data-cy="booking-price"
+            >
               <span>€{{ bookingInfo.totalPrice }}</span>
             </div>
           </v-col>
@@ -78,9 +103,10 @@
               block
               class="px-12"
               color="primary"
+              data-cy="booking-save"
               elevation="2"
-              tile
               large
+              tile
               @click="finishBooking()"
             >
               <span class="btn-text">Save</span>
@@ -92,13 +118,12 @@
   </v-col>
 </template>
 <script>
-import { mapGetters, mapState } from "vuex";
+import { mapGetters } from "vuex";
 import { inputFormatDate } from "@/helpers/dateHelpers";
 
 export default {
   name: "BookingSummary",
   computed: {
-    ...mapState(["hotel", "booking"]),
     ...mapGetters({
       hotelRoom: "getRoomById",
       bookingInfo: "getBookingInfo",
