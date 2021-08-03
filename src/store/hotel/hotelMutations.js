@@ -20,6 +20,17 @@ export const hotelMutations = {
     state.booking.totalPrice = room.price;
   },
   /**
+   * Set LocalStorage room data
+   * @param state
+   * @param localStorage
+   */
+  setBookingRoomLocalStorage(state, localStorage) {
+    state.booking.roomId = localStorage.roomId;
+    state.booking.roomName = localStorage.roomName;
+    state.booking.roomType = localStorage.roomType;
+    state.booking.totalPrice = localStorage.totalPrice;
+  },
+  /**
    * Set booking date and occupancy data
    * @param state
    * @param info

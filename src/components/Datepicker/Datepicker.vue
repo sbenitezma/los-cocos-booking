@@ -1,27 +1,27 @@
 <style lang="scss" scoped>
-// =============================================================================
-// DATEPICKER
-// =============================================================================
 .v-text-field {
-  max-width: 150px;
+  max-width: 130px;
 }
 </style>
 <template>
   <v-menu
-    ref="calendarMenu"
-    v-model="calendarMenu"
     :close-on-content-click="false"
-    transition="scale-transition"
-    offset-y
+    data-cy="calendar-menu"
     max-width="290px"
     min-width="auto"
+    offset-y
+    ref="calendarMenu"
+    transition="scale-transition"
+    v-model="calendarMenu"
   >
     <template v-slot:activator="{ on, attrs }">
       <v-text-field
         append-icon="mdi-calendar-blank"
         aria-label="book-in"
         background-color="white"
+        class="subheading"
         clear-icon="$vuetify.icons.big"
+        data-cy="input-date"
         :height="45"
         dense
         outlined
@@ -33,6 +33,7 @@
     </template>
     <v-date-picker
       :min="minDate ? minDate : currentDate"
+      data-cy="date-picker"
       elevation="1"
       no-title
       show-current
@@ -71,14 +72,15 @@ export default {
       return this.inputFormatDate(this.date);
     },
   },
+  watch: {
+    value: function (newVal) {
+      this.setDate(newVal);
+    },
+  },
   created() {
     let stringDate = new Date();
     this.currentDate = stringDate.toISOString();
-    this.dataValue = this.value;
-    if (Array.isArray(this.dataValue)) {
-      this.dataValue = [];
-    }
-    this.inputDate = this.inputFormatDate(this.dataValue);
+    this.setDate(this.value);
   },
   methods: {
     /**
@@ -88,6 +90,13 @@ export default {
      */
     inputFormatDate(date) {
       return inputFormatDate(date);
+    },
+    /**
+     * Set input date on proper format
+     */
+    setDate(value) {
+      this.dataValue = value;
+      this.inputDate = this.inputFormatDate(this.dataValue);
     },
     /**
      * Update date values

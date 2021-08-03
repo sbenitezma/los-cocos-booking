@@ -7,4 +7,8 @@ module.exports = {
     "**/src/components/**/*.spec.[jt]s?(x)",
     "**/src/store/**/*.spec.[jt]s?(x)",
   ],
+  moduleNameMapper: {
+    "^.+\\.(css|style|less|sass|scss|png|jpg|ttf|woff|woff2|svg)$":
+      "jest-transform-stub",
+  },
 };

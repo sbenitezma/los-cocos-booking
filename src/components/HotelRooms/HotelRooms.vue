@@ -6,6 +6,9 @@
           <v-card
             append
             :elevation="hover || bookingInfo.roomName === room.name ? 3 : 0"
+            :class="{
+              'v-card--active': bookingInfo.roomName === room.name,
+            }"
             class="v-card--small pa-4 pr-0"
             exact
             :max-height="230"

@@ -42,16 +42,33 @@ export default {
     this.fetchHotelInfo();
   },
   methods: {
+    /**
+     * Set Hotel info from JSON
+     * @returns {Promise<void>}
+     */
     async fetchHotelInfo() {
       await this.$store.dispatch("setLoading", {
         section: "info",
         value: true,
       });
       await this.$store.dispatch("LOAD_HOTEL");
+      if (localStorage.getItem("booking")) {
+        await this.setBookingRoomInfo(
+          JSON.parse(localStorage.getItem("booking"))
+        );
+      }
       await this.$store.dispatch("setLoading", {
         section: "info",
         value: false,
       });
+    },
+    /**
+     * Set LocalStorage Data
+     * @returns {Promise<void>}
+     */
+    async setBookingRoomInfo(booking) {
+      await this.$store.dispatch("setBookingRoomLocalStorage", booking);
+      await this.$store.dispatch("setBookingInfo", booking);
     },
   },
 };
