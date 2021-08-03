@@ -103,15 +103,18 @@ export default {
       hotelRoom: "getRoomById",
       bookingInfo: "getBookingInfo",
     }),
+    /**
+     * Get Button disabled according restrictions
+     */
     getDisabledBooking() {
-      const room = this.hotelRoom(this.bookingInfo?.roomId);
+      const room = this.hotelRoom(this.bookingInfo.roomId);
       if (room) {
         if (
           room.occupancy >=
             this.bookingInfo.adultsOccupancy +
               this.bookingInfo.childrenOccupancy &&
           this.bookingInfo.adultsOccupancy > 0 &&
-          this.bookingInfo.childrenOccupancy > 0
+          this.bookingInfo.childrenOccupancy >= 0
         )
           return false;
       }
@@ -124,7 +127,7 @@ export default {
      * @returns {string|*}
      */
     finishBooking() {
-      console.log("finish booking");
+      localStorage.setItem("booking", JSON.stringify(this.bookingInfo));
     },
     /**
      * Parse date into input format dd/mm/YYYY

@@ -35,4 +35,9 @@ export const hotelActions = {
       commit("setBookingInfo", info);
     }
   },
+  setBookingRoomLocalStorage({ commit }, info) {
+    if (info) {
+      commit("setBookingRoomLocalStorage", info);
+    }
+  },
 };

@@ -71,14 +71,15 @@ export default {
       return this.inputFormatDate(this.date);
     },
   },
+  watch: {
+    value: function (newVal) {
+      this.setDate(newVal);
+    },
+  },
   created() {
     let stringDate = new Date();
     this.currentDate = stringDate.toISOString();
-    this.dataValue = this.value;
-    if (Array.isArray(this.dataValue)) {
-      this.dataValue = [];
-    }
-    this.inputDate = this.inputFormatDate(this.dataValue);
+    this.setDate(this.value);
   },
   methods: {
     /**
@@ -88,6 +89,10 @@ export default {
      */
     inputFormatDate(date) {
       return inputFormatDate(date);
+    },
+    setDate(value) {
+      this.dataValue = value;
+      this.inputDate = this.inputFormatDate(this.dataValue);
     },
     /**
      * Update date values

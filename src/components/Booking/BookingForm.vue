@@ -40,8 +40,8 @@
               :items="occupancyAdults"
               class="shrink mx-8"
               dense
-              item-text="text"
-              item-value="val"
+              item-text="type"
+              item-value="value"
               label="Select"
               outlined
               persistent-hint
@@ -57,8 +57,8 @@
               :items="occupancyChildren"
               class="shrink mx-6"
               dense
-              item-text="text"
-              item-value="val"
+              item-text="type"
+              item-value="value"
               label="Select"
               outlined
               persistent-hint
@@ -101,29 +101,50 @@ export default {
   data: () => ({
     checkInDate: "",
     checkOutDate: "",
-    selectAdults: { text: "Adults: 1", val: 1 },
-    selectChildren: { text: "Children: 1", val: 1 },
+    selectAdults: { type: "Adults: 1", value: 1 },
+    selectChildren: { type: "Children: 0", value: 0 },
     occupancyAdults: [
-      { text: "Adults: 1", val: 1 },
-      { text: "Adults: 2", val: 2 },
-      { text: "Adults: 3", val: 3 },
-      { text: "Adults: 4", val: 4 },
+      { type: "Adults: 1", value: 1 },
+      { type: "Adults: 2", value: 2 },
+      { type: "Adults: 3", value: 3 },
+      { type: "Adults: 4", value: 4 },
     ],
     occupancyChildren: [
-      { text: "Children: 1", val: 1 },
-      { text: "Children: 2", val: 2 },
-      { text: "Children: 3", val: 3 },
+      { type: "Children: 0", value: 0 },
+      { type: "Children: 1", value: 1 },
+      { type: "Children: 2", value: 2 },
+      { type: "Children: 3", value: 3 },
     ],
   }),
   created() {
-    const today = new Date();
-    let tomorrow = new Date(today);
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    this.updateValue({ type: "checkInDate", value: this.formatDate(today) });
-    this.updateValue({
-      type: "checkOutDate",
-      value: this.formatDate(tomorrow),
-    });
+    let booking = JSON.parse(localStorage.getItem("booking"));
+    if (booking) {
+      this.updateValue({
+        type: "checkInDate",
+        value: booking.checkInDate,
+      });
+      this.updateValue({
+        type: "checkOutDate",
+        value: booking.checkOutDate,
+      });
+      this.updateValue({
+        type: "selectAdults",
+        value: booking.adultsOccupancy,
+      });
+      this.updateValue({
+        type: "selectChildren",
+        value: booking.childrenOccupancy,
+      });
+    } else {
+      const today = new Date();
+      let tomorrow = new Date(today);
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      this.updateValue({ type: "checkInDate", value: this.formatDate(today) });
+      this.updateValue({
+        type: "checkOutDate",
+        value: this.formatDate(tomorrow),
+      });
+    }
   },
   methods: {
     /**
@@ -139,6 +160,9 @@ export default {
         return `https://source.unsplash.com/collection/3727392/25x25?sig=${100}`;
       }
     },
+    /**
+     * Set Booking information
+     */
     setBooking() {
       this.$store.dispatch("setLoading", {
         section: "info",
@@ -147,8 +171,13 @@ export default {
       this.$store.dispatch("setBookingInfo", {
         checkInDate: this.checkInDate,
         checkOutDate: this.checkOutDate,
-        adultsOccupancy: this.selectAdults?.val,
-        childrenOccupancy: this.selectChildren?.val,
+        adultsOccupancy: this.selectAdults.value
+          ? this.selectAdults.value
+          : this.selectAdults,
+        childrenOccupancy:
+          this.selectChildren.value >= 0
+            ? this.selectChildren.value
+            : this.selectChildren,
       });
       this.$store.dispatch("setLoading", {
         section: "info",
@@ -161,6 +190,14 @@ export default {
      */
     updateValue(value) {
       this[value?.type] = value?.value;
+      if (value.type === "checkInDate" && this.checkOutDate.value !== "") {
+        let checkIn = new Date(value.value);
+        let checkOut = new Date(this.checkOutDate);
+        // Validate if checkout is greater than checkIn to change it to checkout
+        if (checkOut < checkIn) {
+          this.checkOutDate = this.formatDate(new Date(this.checkInDate));
+        }
+      }
     },
     /**
      * Initial format date for Datepicker component
