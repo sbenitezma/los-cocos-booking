@@ -46,4 +46,15 @@ describe("BookingSummary.vue", () => {
     });
     expect(wrapper.findComponent(BookingSummary).exists()).toBeTruthy();
   });
+
+  it("Test Format date call method", () => {
+    wrapper = shallowMount(BookingSummary, {
+      router,
+      store,
+      localVue,
+      vuetify,
+      stubs: ["router-link", "router-view"],
+    });
+    expect(wrapper.vm.parseDate("1999-02-13")).toBe("13/02/1999");
+  });
 });
