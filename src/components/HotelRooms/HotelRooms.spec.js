@@ -22,6 +22,32 @@ describe("HotelRooms.vue", () => {
   beforeEach(() => {
     store = new Vuex.Store({
       state: {
+        rooms: [
+          {
+            id: 1,
+            name: "Tst",
+            description: "Tst2",
+            floorSize: "20m2",
+            numberOfBeds: 1,
+            occupancy: 2,
+            price: 200,
+            typeOfRoom: "Room",
+            typeOfBed: "Queen-size",
+            thumbnail: "room_1",
+          },
+          {
+            id: 2,
+            name: "Tst2",
+            description: "Tst2",
+            floorSize: "50m2",
+            numberOfBeds: 1,
+            occupancy: 2,
+            price: 350,
+            typeOfRoom: "Bungalow",
+            typeOfBed: "Standard",
+            thumbnail: "room_2",
+          },
+        ],
         booking: hotel.state().booking,
       },
       getters: {
@@ -45,5 +71,16 @@ describe("HotelRooms.vue", () => {
       stubs: ["router-link", "router-view"],
     });
     expect(wrapper.findComponent(HotelRooms).exists()).toBeTruthy();
+  });
+
+  it("Gets Room Picture", () => {
+    wrapper = shallowMount(HotelRooms, {
+      router,
+      store,
+      localVue,
+      vuetify,
+      stubs: ["router-link", "router-view"],
+    });
+    expect(wrapper.vm.getRoomPhoto(store.state.rooms[0])).toBeTruthy();
   });
 });
