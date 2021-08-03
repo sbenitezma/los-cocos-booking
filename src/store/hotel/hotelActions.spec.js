@@ -13,10 +13,13 @@ describe("Hotel store actions", () => {
       state: { data: {}, rooms: [] },
       actions: {
         LOAD_HOTEL: hotelActions.LOAD_HOTEL,
+        setBookingRoom: hotelActions.setBookingRoom,
+        setBookingInfo: hotelActions.setBookingInfo,
+        setBookingRoomLocalStorage: hotelActions.setBookingRoomLocalStorage,
       },
     });
   });
-  it("Tests using a mock mutation but real store", () => {
+  it("Tests LOAD_HOTEL action", () => {
     store.hotUpdate({
       mutations: {
         setHotelInfo: setDataMock,
