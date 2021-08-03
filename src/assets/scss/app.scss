@@ -12,11 +12,19 @@ body,
     font-family: $body-font-family !important;
   }
   font-family: $body-font-family !important;
+  .v-toolbar__content {
+    .v-btn__content {
+      font-family: $heading-font-family !important;
+    }
+  }
   .justify-content {
     .v-toolbar__content,
     .v-toolbar__extension {
       justify-content: space-around !important;
     }
+  }
+  .btn-text {
+    text-transform: capitalize;
   }
   .rrss {
     @include footer-image($footer-images-url, -385px, -16px, 50px, 55px);

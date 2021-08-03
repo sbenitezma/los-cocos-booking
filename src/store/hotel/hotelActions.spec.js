@@ -20,7 +20,6 @@ describe("Hotel store actions", () => {
     store.hotUpdate({
       mutations: {
         setHotelInfo: setDataMock,
-        refreshPageInfo: setDataMock,
       },
     });
     return store.dispatch("LOAD_HOTEL").then(() => {

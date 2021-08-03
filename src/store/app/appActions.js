@@ -9,7 +9,6 @@ export const appActions = {
   setLoading({ commit }, loadingState) {
     if (loadingState) {
       commit("setLoading", loadingState);
-      commit("refreshPageInfo");
     }
   },
 };

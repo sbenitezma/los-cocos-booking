@@ -10,7 +10,29 @@ export const hotelActions = {
   async LOAD_HOTEL({ commit }) {
     if (db) {
       commit("setHotelInfo", db);
-      commit("refreshPageInfo");
+    }
+  },
+
+  /**
+   * Set Booking room
+   * @param commit
+   * @param room
+   * @returns {Promise<void>}
+   * @constructor
+   */
+  setBookingRoom({ commit }, room) {
+    if (room) {
+      commit("setBookingRoom", room);
+    }
+  },
+  /**
+   * Set booking date and occupancy data
+   * @param commit
+   * @param info
+   */
+  setBookingInfo({ commit }, info) {
+    if (info) {
+      commit("setBookingInfo", info);
     }
   },
 };

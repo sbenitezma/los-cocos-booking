@@ -2,11 +2,14 @@
 // =============================================================================
 // DATEPICKER
 // =============================================================================
+.v-text-field {
+  max-width: 150px;
+}
 </style>
 <template>
   <v-menu
-    ref="menu1"
-    v-model="menu1"
+    ref="calendarMenu"
+    v-model="calendarMenu"
     :close-on-content-click="false"
     transition="scale-transition"
     offset-y
@@ -15,67 +18,89 @@
   >
     <template v-slot:activator="{ on, attrs }">
       <v-text-field
-        @blur="date = parseDate(dateFormatted)"
         append-icon="mdi-calendar-blank"
         aria-label="book-in"
         background-color="white"
         clear-icon="$vuetify.icons.big"
+        :height="45"
         dense
         outlined
         persistent-hint
         v-bind="attrs"
-        v-model="dateFormatted"
+        v-model="inputDate"
         v-on="on"
       ></v-text-field>
     </template>
     <v-date-picker
-      class="v-picker__calendar"
-      v-model="date"
-      show-current
+      :min="minDate ? minDate : currentDate"
       elevation="1"
       no-title
-      @input="menu1 = false"
+      show-current
+      v-model="dataValue"
+      @input="updateValue"
     ></v-date-picker>
   </v-menu>
 </template>
 <script>
+import { inputFormatDate } from "@/helpers/dateHelpers";
+
 export default {
   name: "Datepicker",
+  props: {
+    minDate: {
+      type: String,
+      default: "",
+    },
+    type: {
+      type: String,
+      default: "",
+    },
+    value: {
+      type: String,
+      default: "",
+    },
+  },
+  data: () => ({
+    calendarMenu: false,
+    currentDate: "",
+    dataValue: "",
+    inputDate: "",
+  }),
   computed: {
     computedDateFormatted() {
-      return this.formatDate(this.date);
+      return this.inputFormatDate(this.date);
     },
   },
-  data: (vm) => ({
-    date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
-      .toISOString()
-      .substr(0, 10),
-    dateFormatted: vm.formatDate(
-      new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
-        .toISOString()
-        .substr(0, 10)
-    ),
-    menu1: false,
-    menu2: false,
-  }),
-  watch: {
-    date() {
-      this.dateFormatted = this.formatDate(this.date);
-    },
+  created() {
+    let stringDate = new Date();
+    this.currentDate = stringDate.toISOString();
+    this.dataValue = this.value;
+    if (Array.isArray(this.dataValue)) {
+      this.dataValue = [];
+    }
+    this.inputDate = this.inputFormatDate(this.dataValue);
   },
-
   methods: {
-    formatDate(date) {
-      if (!date) return null;
-
-      const [year, month, day] = date.split("-");
-      return `${day}/${month}/${year}`;
+    /**
+     * Formats the date to display it in custom format (changes from YYYY/MM/DD to DD/MM/YYYY)
+     * @param date
+     * @returns {*}
+     */
+    inputFormatDate(date) {
+      return inputFormatDate(date);
     },
-    parseDate(date) {
-      if (!date) return null;
-
-      const [month, day, year] = date.split("/");
-      return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
+    /**
+     * Update date values
+     * @param value
+     */
+    updateValue(value) {
+      this.calendarMenu = false;
+      this.dataValue = value;
+      this.inputDate = this.inputFormatDate(value);
+      this.$emit("updateValue", {
+        type: this.type,
+        value: this.dataValue,
+      });
     },
   },
 };
