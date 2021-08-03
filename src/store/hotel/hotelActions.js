@@ -35,6 +35,11 @@ export const hotelActions = {
       commit("setBookingInfo", info);
     }
   },
+  /**
+   * Set Booking info to LocalStorage
+   * @param commit
+   * @param info
+   */
   setBookingRoomLocalStorage({ commit }, info) {
     if (info) {
       commit("setBookingRoomLocalStorage", info);
