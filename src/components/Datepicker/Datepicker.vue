@@ -32,7 +32,7 @@
       ></v-text-field>
     </template>
     <v-date-picker
-      :min="currentDate"
+      :min="minDate ? minDate : currentDate"
       elevation="1"
       no-title
       show-current
@@ -42,16 +42,22 @@
   </v-menu>
 </template>
 <script>
+import { inputFormatDate } from "@/helpers/dateHelpers";
+
 export default {
   name: "Datepicker",
-  created() {
-    let stringDate = new Date();
-    this.updateValue(this.formatDate());
-    this.currentDate = stringDate.toISOString();
-  },
-  computed: {
-    computedDateFormatted() {
-      return this.inputFormatDate(this.date);
+  props: {
+    minDate: {
+      type: String,
+      default: "",
+    },
+    type: {
+      type: String,
+      default: "",
+    },
+    value: {
+      type: String,
+      default: "",
     },
   },
   data: () => ({
@@ -60,6 +66,20 @@ export default {
     dataValue: "",
     inputDate: "",
   }),
+  computed: {
+    computedDateFormatted() {
+      return this.inputFormatDate(this.date);
+    },
+  },
+  created() {
+    let stringDate = new Date();
+    this.currentDate = stringDate.toISOString();
+    this.dataValue = this.value;
+    if (Array.isArray(this.dataValue)) {
+      this.dataValue = [];
+    }
+    this.inputDate = this.inputFormatDate(this.dataValue);
+  },
   methods: {
     /**
      * Formats the date to display it in custom format (changes from YYYY/MM/DD to DD/MM/YYYY)
@@ -67,23 +87,7 @@ export default {
      * @returns {*}
      */
     inputFormatDate(date) {
-      if (!date) return null;
-      const [year, month, day] = date.split("-");
-      return `${day}/${month}/${year}`;
-    },
-    /**
-     * Initial format date for Datepicker component
-     */
-    formatDate() {
-      let d = new Date(),
-        month = "" + (d.getMonth() + 1),
-        day = "" + d.getDate(),
-        year = d.getFullYear();
-
-      if (month.length < 2) month = "0" + month;
-      if (day.length < 2) day = "0" + day;
-
-      return [year, month, day].join("-");
+      return inputFormatDate(date);
     },
     /**
      * Update date values
@@ -93,6 +97,10 @@ export default {
       this.calendarMenu = false;
       this.dataValue = value;
       this.inputDate = this.inputFormatDate(value);
+      this.$emit("updateValue", {
+        type: this.type,
+        value: this.dataValue,
+      });
     },
   },
 };

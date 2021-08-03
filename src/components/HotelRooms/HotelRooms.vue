@@ -73,11 +73,10 @@
   </v-col>
 </template>
 <script>
-import { mapGetters, mapState } from "vuex";
+import { mapGetters } from "vuex";
 export default {
   name: "HotelRooms",
   computed: {
-    ...mapState(["hotel", "booking"]),
     ...mapGetters({
       hotelRooms: "getHotelRooms",
       bookingInfo: "getBookingInfo",

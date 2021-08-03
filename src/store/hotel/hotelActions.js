@@ -25,4 +25,14 @@ export const hotelActions = {
       commit("setBookingRoom", room);
     }
   },
+  /**
+   * Set booking date and occupancy data
+   * @param commit
+   * @param info
+   */
+  setBookingInfo({ commit }, info) {
+    if (info) {
+      commit("setBookingInfo", info);
+    }
+  },
 };

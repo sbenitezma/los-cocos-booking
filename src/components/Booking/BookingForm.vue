@@ -20,10 +20,19 @@
       <v-toolbar-items class="booking-section">
         <v-row>
           <v-col cols="2" md="2" offset="2" class="mt-4 px-0 pl-4 mr-8">
-            <Datepicker />
+            <Datepicker
+              type="checkInDate"
+              :value="checkInDate"
+              @updateValue="updateValue"
+            />
           </v-col>
           <v-col cols="2" md="2" class="mt-4 px-0 ml-n12 mr-n4">
-            <Datepicker />
+            <Datepicker
+              :minDate="checkInDate"
+              type="checkOutDate"
+              :value="checkOutDate"
+              @updateValue="updateValue"
+            />
           </v-col>
           <v-col cols="2" md="2" class="mt-4 px-0 ml-n12 mr-2">
             <v-select
@@ -90,6 +99,8 @@ export default {
     }),
   },
   data: () => ({
+    checkInDate: "",
+    checkOutDate: "",
     selectAdults: { text: "Adults: 1", val: 1 },
     selectChildren: { text: "Children: 1", val: 1 },
     occupancyAdults: [
@@ -104,6 +115,16 @@ export default {
       { text: "Children: 3", val: 3 },
     ],
   }),
+  created() {
+    const today = new Date();
+    let tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    this.updateValue({ type: "checkInDate", value: this.formatDate(today) });
+    this.updateValue({
+      type: "checkOutDate",
+      value: this.formatDate(tomorrow),
+    });
+  },
   methods: {
     /**
      * Get Custom icon by name
@@ -119,7 +140,40 @@ export default {
       }
     },
     setBooking() {
-      console.log("booking");
+      this.$store.dispatch("setLoading", {
+        section: "info",
+        value: true,
+      });
+      this.$store.dispatch("setBookingInfo", {
+        checkInDate: this.checkInDate,
+        checkOutDate: this.checkOutDate,
+        adultsOccupancy: this.selectAdults?.val,
+        childrenOccupancy: this.selectChildren?.val,
+      });
+      this.$store.dispatch("setLoading", {
+        section: "info",
+        value: false,
+      });
+    },
+    /**
+     * Update date values
+     * @param value
+     */
+    updateValue(value) {
+      this[value?.type] = value?.value;
+    },
+    /**
+     * Initial format date for Datepicker component
+     */
+    formatDate(value) {
+      let d = value,
+        month = "" + (d.getMonth() + 1),
+        day = "" + d.getDate(),
+        year = d.getFullYear();
+
+      if (month.length < 2) month = "0" + month;
+      if (day.length < 2) day = "0" + day;
+      return [year, month, day].join("-");
     },
   },
 };

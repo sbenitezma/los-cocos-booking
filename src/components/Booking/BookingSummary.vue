@@ -21,14 +21,26 @@
                         From {{ bookingInfo.checkInTime }}
                       </span>
                     </div>
-                    <div class="pt-4">
-                      <span class="subheading-3">Reservation Date</span>
+                  </v-col>
+                  <v-col cols="6" md="6" xs="12">
+                    <div>
+                      <span class="subheading-3">Check out</span>
                       <v-spacer />
                       <span class="body">
-                        From {{ bookingInfo.checkInDate }} to
-                        {{ bookingInfo.checkOutDate }}
+                        To {{ bookingInfo.checkOutTime }}
                       </span>
+                      <v-spacer />
                     </div>
+                  </v-col>
+                </v-row>
+                <v-row no-gutters>
+                  <v-col cols="12" md="12" xs="12" class="pt-4">
+                    <span class="subheading-3">Reservation Date</span>
+                    <v-spacer />
+                    <span class="body">
+                      From {{ parseDate(bookingInfo.checkInDate) }} to
+                      {{ parseDate(bookingInfo.checkOutDate) }}
+                    </span>
                     <div class="pt-4">
                       <span class="subheading-3">People</span>
                       <v-spacer />
@@ -39,16 +51,6 @@
                       <span class="body">
                         Children: {{ bookingInfo.childrenOccupancy }}
                       </span>
-                    </div>
-                  </v-col>
-                  <v-col cols="6" md="6" xs="12">
-                    <div>
-                      <span class="subheading-3">Check out</span>
-                      <v-spacer />
-                      <span class="body">
-                        To {{ bookingInfo.checkOutTime }}
-                      </span>
-                      <v-spacer />
                     </div>
                   </v-col>
                 </v-row>
@@ -91,6 +93,8 @@
 </template>
 <script>
 import { mapGetters, mapState } from "vuex";
+import { inputFormatDate } from "@/helpers/dateHelpers";
+
 export default {
   name: "BookingSummary",
   computed: {
@@ -121,6 +125,14 @@ export default {
      */
     finishBooking() {
       console.log("finish booking");
+    },
+    /**
+     * Parse date into input format dd/mm/YYYY
+     * @param value
+     * @returns {*}
+     */
+    parseDate(value) {
+      return inputFormatDate(value);
     },
   },
 };
