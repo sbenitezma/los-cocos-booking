@@ -78,6 +78,7 @@ describe("Hotel store mutations", () => {
     expect(state.booking.roomName).toBe(room.name);
     expect(state.booking.roomId).toBe(room.id);
     expect(state.booking.roomType).toBe(room.typeOfRoom);
+    expect(state.booking.totalPrice).toBe(room.price);
   });
 
   it("Test setBookingRoomLocalStorage Mutation", () => {
@@ -112,6 +113,7 @@ describe("Hotel store mutations", () => {
     expect(state.booking.roomName).toBe(room.name);
     expect(state.booking.roomId).toBe(room.id);
     expect(state.booking.roomType).toBe(room.typeOfRoom);
+    expect(state.booking.totalPrice).toBe(room.price);
   });
 
   it("Test setBookingInfo Mutation", () => {
@@ -143,8 +145,9 @@ describe("Hotel store mutations", () => {
     };
     hotelMutations.setBookingRoom(state, booking);
     expect(state.booking).toBeTruthy();
-    expect(state.booking.roomName).toBe(booking.name);
-    expect(state.booking.roomId).toBe(booking.id);
-    expect(state.booking.roomType).toBe(booking.typeOfRoom);
+    expect(state.booking.checkInDate).toBe(booking.checkInDate);
+    expect(state.booking.checkOutDate).toBe(booking.checkOutDate);
+    expect(state.booking.adultsOccupancy).toBe(booking.adultsOccupancy);
+    expect(state.booking.childrenOccupancy).toBe(booking.childrenOccupancy);
   });
 });
