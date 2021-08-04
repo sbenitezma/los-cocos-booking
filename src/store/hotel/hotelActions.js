@@ -45,4 +45,24 @@ export const hotelActions = {
       commit("setBookingRoomLocalStorage", info);
     }
   },
+  /**
+   * Set Booking totalPrice
+   * @param commit
+   * @param totalPrice
+   */
+  setBookingTotalPrice({ commit }, totalPrice) {
+    if (totalPrice) {
+      commit("setBookingTotalPrice", totalPrice);
+    }
+  },
+  /**
+   * Set PromoCode
+   * @param commit
+   * @param promoCode
+   */
+  setPromoCode({ commit }, promoCode) {
+    if (promoCode) {
+      commit("setPromoCode", promoCode);
+    }
+  },
 };

@@ -17,7 +17,14 @@ export const hotelMutations = {
     state.booking.roomId = room.id;
     state.booking.roomName = room.name;
     state.booking.roomType = room.typeOfRoom;
-    state.booking.totalPrice = room.price;
+    state.booking.price = room.price;
+    if (state.booking.promoCode) {
+      let discount = state.booking.promoCode / 100;
+      state.booking.totalPrice =
+        state.booking.price - state.booking.price * discount;
+    } else {
+      state.booking.totalPrice = room.price;
+    }
   },
   /**
    * Set LocalStorage room data
@@ -28,6 +35,8 @@ export const hotelMutations = {
     state.booking.roomId = localStorage.roomId;
     state.booking.roomName = localStorage.roomName;
     state.booking.roomType = localStorage.roomType;
+    state.booking.promoCode = localStorage.promoCode;
+    state.booking.price = localStorage.price;
     state.booking.totalPrice = localStorage.totalPrice;
   },
   /**
@@ -40,5 +49,21 @@ export const hotelMutations = {
     state.booking.checkOutDate = info.checkOutDate;
     state.booking.adultsOccupancy = info.adultsOccupancy;
     state.booking.childrenOccupancy = info.childrenOccupancy;
+  },
+  /**
+   * Set PromoCode
+   * @param state
+   * @param promoCode
+   */
+  setPromoCode(state, promoCode) {
+    state.booking.promoCode = promoCode;
+  },
+  /**
+   * Set total price of booking
+   * @param state
+   * @param totalPrice
+   */
+  setBookingTotalPrice(state, totalPrice) {
+    state.booking.totalPrice = totalPrice;
   },
 };

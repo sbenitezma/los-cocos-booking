@@ -31,3 +31,7 @@
 .subheading-3 {
   @include font-style(color('tertiary'), 12px, 700, 16px);
 }
+// Reservation prices
+.subheading-4 {
+  @include font-style(color('tertiary'), 14px, 700, 14px);
+}
