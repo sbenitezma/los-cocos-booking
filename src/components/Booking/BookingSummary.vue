@@ -84,33 +84,70 @@
       <v-divider class="mx-2" />
       <v-card-actions>
         <v-row no-gutters>
-          <v-col cols="10" lg="10" md="10" sm="12">
-            <div class="mt-0 pt-4 mb-6 subheading-2" data-cy="booking-total">
-              <span>Total</span>
-            </div>
-          </v-col>
-          <v-col cols="2" lg="2" md="2" sm="12">
-            <div
-              class="mt-0 pt-4 mb-6 subheading-2 float-right"
-              data-cy="booking-price"
-            >
-              <span>€{{ bookingInfo.totalPrice }}</span>
-            </div>
-          </v-col>
-          <v-col cols="12" lg="12" md="12" class="text-center">
-            <v-btn
-              :disabled="getDisabledBooking"
-              block
-              class="px-12"
-              color="primary"
-              data-cy="booking-save"
-              elevation="2"
-              large
-              tile
-              @click="finishBooking()"
-            >
-              <span class="btn-text">Save</span>
-            </v-btn>
+          <v-col cols="12" lg="12" md="12" sm="12" class="pa-0 ma-0">
+            <v-row no-gutters>
+              <v-col cols="10" lg="10" md="10" sm="12">
+                <div class="mt-0 pt-4 subheading-4" data-cy="booking-subtotal">
+                  <span>Subtotal</span>
+                </div>
+              </v-col>
+              <v-col cols="2" lg="2" md="2" sm="12">
+                <div
+                  class="mt-0 pt-4 subheading-4 float-right"
+                  data-cy="booking-price"
+                >
+                  <span>€{{ bookingInfo.price }}</span>
+                </div>
+              </v-col>
+            </v-row>
+            <v-row no-gutters>
+              <v-col cols="10" lg="10" md="10" sm="12">
+                <div class="mt-0 pt-4 subheading-3" data-cy="booking-discount">
+                  <span>Discount</span>
+                </div>
+              </v-col>
+              <v-col cols="2" lg="2" md="2" sm="12">
+                <div
+                  class="mt-0 pt-4 subheading float-right"
+                  data-cy="booking-promoCode"
+                >
+                  <span>{{ bookingInfo.promoCode }}%</span>
+                </div>
+              </v-col>
+            </v-row>
+            <v-row no-gutters>
+              <v-col cols="10" lg="10" md="10" sm="12">
+                <div
+                  class="mt-0 pt-4 mb-6 subheading-2"
+                  data-cy="booking-total"
+                >
+                  <span>Total</span>
+                </div>
+              </v-col>
+              <v-col cols="2" lg="2" md="2" sm="12">
+                <div
+                  class="mt-0 pt-4 mb-6 subheading-2 float-right"
+                  data-cy="booking-totalPrice"
+                >
+                  <span>€{{ bookingInfo.totalPrice }}</span>
+                </div>
+              </v-col>
+              <v-col cols="12" lg="12" md="12" class="text-center">
+                <v-btn
+                  :disabled="getDisabledBooking"
+                  block
+                  class="px-12"
+                  color="primary"
+                  data-cy="booking-save"
+                  elevation="2"
+                  large
+                  tile
+                  @click="finishBooking()"
+                >
+                  <span class="btn-text">Save</span>
+                </v-btn>
+              </v-col>
+            </v-row>
           </v-col>
         </v-row>
       </v-card-actions>
@@ -152,6 +189,7 @@ export default {
      * @returns {string|*}
      */
     finishBooking() {
+      this.$store.dispatch("setBookingTotalPrice", this.getTotalPrice);
       localStorage.setItem("booking", JSON.stringify(this.bookingInfo));
     },
     /**

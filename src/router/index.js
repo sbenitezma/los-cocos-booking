@@ -13,7 +13,7 @@ const routes = [
     component: Home,
   },
   {
-    path: "/rooms",
+    path: "/rooms/:promo_code?",
     name: "Rooms",
     component: Rooms,
   },

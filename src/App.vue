@@ -36,12 +36,41 @@ export default {
     Navbar,
     Footer,
   },
+  data: () => ({
+    discount: false,
+  }),
   mounted() {
     // fetch the data when the view is created and the data is
     // already being observed
     this.fetchHotelInfo();
+    this.checkLocalStorage();
   },
   methods: {
+    /**
+     * Validate LocalStorage Data
+     */
+    checkLocalStorage() {
+      let promoCode = this.$route.query.promo_code;
+      if (localStorage.getItem("booking")) {
+        let bookingData = JSON.parse(localStorage.getItem("booking"));
+        if (promoCode) {
+          bookingData.promoCode = promoCode;
+        } else {
+          promoCode = 0;
+          bookingData.promoCode = promoCode;
+        }
+        if (bookingData) {
+          let discount = bookingData.promoCode / 100;
+          bookingData.totalPrice =
+            bookingData.price - bookingData.price * discount;
+        }
+        this.setBookingRoomInfo(bookingData);
+      } else {
+        if (promoCode) {
+          this.$store.dispatch("setPromoCode", promoCode);
+        }
+      }
+    },
     /**
      * Set Hotel info from JSON
      * @returns {Promise<void>}
@@ -52,11 +81,6 @@ export default {
         value: true,
       });
       await this.$store.dispatch("LOAD_HOTEL");
-      if (localStorage.getItem("booking")) {
-        await this.setBookingRoomInfo(
-          JSON.parse(localStorage.getItem("booking"))
-        );
-      }
       await this.$store.dispatch("setLoading", {
         section: "info",
         value: false,
@@ -66,9 +90,9 @@ export default {
      * Set LocalStorage Data
      * @returns {Promise<void>}
      */
-    async setBookingRoomInfo(booking) {
-      await this.$store.dispatch("setBookingRoomLocalStorage", booking);
-      await this.$store.dispatch("setBookingInfo", booking);
+    setBookingRoomInfo(booking) {
+      this.$store.dispatch("setBookingRoomLocalStorage", booking);
+      this.$store.dispatch("setBookingInfo", booking);
     },
   },
 };

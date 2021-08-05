@@ -95,7 +95,7 @@
         contain
         id="LosCocosHeadForm"
         max-width="100%"
-        :src="require('@/assets/images/header/los-cocos-room-header-2-x.png')"
+        :src="getHeaderImage()"
       >
         <v-toolbar-items
           class="booking-section justify-center mt-8"
