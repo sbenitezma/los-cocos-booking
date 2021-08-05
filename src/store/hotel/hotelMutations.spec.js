@@ -46,65 +46,50 @@ describe("Hotel store mutations", () => {
     expect(state.data).toBe(hotel.data);
   });
 
-  it("Test setBookingRoom Mutation", () => {
+  it("Test setBookingRoom with promoCode", () => {
     const room = {
       id: 1,
       name: "Tst",
       description: "Tst2",
-      floorSize: "20m2",
-      numberOfBeds: 1,
-      occupancy: 2,
       price: 200,
       typeOfRoom: "Room",
-      typeOfBed: "Queen-size",
-      thumbnail: "room_1",
     };
     const state = {
       booking: {
+        price: 0,
+        promoCode: 0,
         roomId: "",
         roomName: "",
         roomType: "",
-        checkInDate: "",
-        checkInTime: "15.00h",
-        checkOutDate: "",
-        checkOutTime: "12.00h",
-        adultsOccupancy: 0,
-        childrenOccupancy: 0,
         totalPrice: 0,
       },
     };
     hotelMutations.setBookingRoom(state, room);
     expect(state.booking).toBeTruthy();
-    expect(state.booking.roomName).toBe(room.name);
     expect(state.booking.roomId).toBe(room.id);
+    expect(state.booking.roomName).toBe(room.name);
     expect(state.booking.roomType).toBe(room.typeOfRoom);
-    expect(state.booking.totalPrice).toBe(room.price);
+    expect(state.booking.price).toBe(room.price);
+    expect(state.booking.promoCode).toBe(state.booking.promoCode);
+    expect(state.booking.totalPrice).toBe(state.booking.totalPrice);
   });
 
-  it("Test setBookingRoomLocalStorage Mutation", () => {
+  it("Test setBookingRoomLocalStorage without promoCode", () => {
     const room = {
       id: 1,
       name: "Tst",
       description: "Tst2",
-      floorSize: "20m2",
-      numberOfBeds: 1,
-      occupancy: 2,
       price: 200,
       typeOfRoom: "Room",
       typeOfBed: "Queen-size",
-      thumbnail: "room_1",
     };
     const state = {
       booking: {
+        price: 0,
+        promoCode: 0,
         roomId: "",
         roomName: "",
         roomType: "",
-        checkInDate: "",
-        checkInTime: "15.00h",
-        checkOutDate: "",
-        checkOutTime: "12.00h",
-        adultsOccupancy: 0,
-        childrenOccupancy: 0,
         totalPrice: 0,
       },
     };
@@ -113,34 +98,27 @@ describe("Hotel store mutations", () => {
     expect(state.booking.roomName).toBe(room.name);
     expect(state.booking.roomId).toBe(room.id);
     expect(state.booking.roomType).toBe(room.typeOfRoom);
+    expect(state.booking.price).toBe(room.price);
     expect(state.booking.totalPrice).toBe(room.price);
   });
 
   it("Test setBookingInfo Mutation", () => {
     const booking = {
-      roomId: 1,
-      roomName: "test",
-      roomType: "test",
+      adultsOccupancy: 0,
       checkInDate: "",
       checkInTime: "15.00h",
       checkOutDate: "",
       checkOutTime: "12.00h",
-      adultsOccupancy: 0,
       childrenOccupancy: 0,
-      totalPrice: 0,
     };
     const state = {
       booking: {
-        roomId: "",
-        roomName: "",
-        roomType: "",
+        adultsOccupancy: 0,
         checkInDate: "",
         checkInTime: "15.00h",
         checkOutDate: "",
         checkOutTime: "12.00h",
-        adultsOccupancy: 0,
         childrenOccupancy: 0,
-        totalPrice: 0,
       },
     };
     hotelMutations.setBookingRoom(state, booking);
@@ -149,5 +127,33 @@ describe("Hotel store mutations", () => {
     expect(state.booking.checkOutDate).toBe(booking.checkOutDate);
     expect(state.booking.adultsOccupancy).toBe(booking.adultsOccupancy);
     expect(state.booking.childrenOccupancy).toBe(booking.childrenOccupancy);
+  });
+
+  it("Test setPromoCode Mutation", () => {
+    const booking = {
+      promoCode: 20,
+    };
+    const state = {
+      booking: {
+        promoCode: 0,
+      },
+    };
+    hotelMutations.setPromoCode(state, booking);
+    expect(state.booking).toBeTruthy();
+    expect(state.booking.promoCode.promoCode).toBe(booking.promoCode);
+  });
+
+  it("Test setBookingTotalPrice Mutation", () => {
+    const booking = {
+      totalPrice: 160,
+    };
+    const state = {
+      booking: {
+        totalPrice: 160,
+      },
+    };
+    hotelMutations.setPromoCode(state, booking);
+    expect(state.booking).toBeTruthy();
+    expect(state.booking.totalPrice).toBe(booking.totalPrice);
   });
 });
