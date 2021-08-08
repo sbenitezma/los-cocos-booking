@@ -9,9 +9,9 @@ describe("Social Media Getters", () => {
     socialMedia: [
       {
         name: "facebook",
-        url: "https://www.facebook.com/hotelloscocoschetumal",
+        path: "https://www.facebook.com/hotelloscocoschetumal",
       },
-      { name: "twitter", url: "https://twitter.com/hotelloscocos" },
+      { name: "twitter", path: "https://twitter.com/hotelloscocos" },
     ],
   };
 

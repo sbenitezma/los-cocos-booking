@@ -3,16 +3,26 @@ import { socialMediaGetters } from "./socialMediaGetters";
 export const socialMedia = {
   state: () => ({
     socialMedia: [
-      { name: "rrss", url: "http://hotelloscocos.com.mx/es/feed" },
       {
+        icon: "mdi-rss",
+        name: "rrss",
+        path: "http://hotelloscocos.com.mx/es/feed",
+      },
+      {
+        icon: "mdi-facebook",
         name: "facebook",
-        url: "https://www.facebook.com/hotelloscocoschetumal",
+        path: "https://www.facebook.com/hotelloscocoschetumal",
       },
       {
+        icon: "mdi-instagram",
         name: "instagram",
-        url: "https://www.facebook.com/hotelloscocoschetumal",
+        path: "https://www.facebook.com/hotelloscocoschetumal",
       },
-      { name: "twitter", url: "https://twitter.com/hotelloscocos" },
+      {
+        icon: "mdi-twitter",
+        name: "twitter",
+        path: "https://twitter.com/hotelloscocos",
+      },
     ],
   }),
   getters: socialMediaGetters,
