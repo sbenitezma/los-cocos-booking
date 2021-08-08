@@ -52,7 +52,7 @@
     <v-navigation-drawer v-model="drawer" absolute>
       <v-list nav dense>
         <v-list-item
-          v-for="item in menuItems"
+          v-for="item in mobileMenuItems"
           :key="item.name"
           :to="item.path"
           link
@@ -91,6 +91,7 @@ export default {
     ...mapGetters({
       loading: "getLoading",
       menuItems: "getHeaderMenu",
+      mobileMenuItems: "getMobileMenu",
     }),
   },
   data: () => ({

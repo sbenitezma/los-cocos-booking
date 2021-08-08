@@ -2,19 +2,11 @@
   <v-app>
     <v-main>
       <v-row>
-        <v-col
-          cols="12"
-          md="8"
-          lg="8"
-          sm="12"
-          xs="12"
-          offset-md="2"
-          offset-lg="2"
-        >
+        <v-col cols="12" md="8" xs="12" offset-md="2">
           <Navbar />
           <v-container fluid class="pt-0 pb-12 mb-12">
             <v-row>
-              <v-col cols="12" md="12" lg="12" sm="12" xs="12">
+              <v-col cols="12" xs="12">
                 <router-view :key="$route.path"></router-view>
               </v-col>
             </v-row>

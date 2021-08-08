@@ -1,21 +1,29 @@
 <template>
-  <v-footer color="white" fixed padless height="50" data-cy="footer">
+  <v-footer
+    class="hidden-sm-and-down"
+    color="white"
+    data-cy="footer"
+    fixed
+    height="50"
+    padless
+  >
     <v-row>
-      <v-col cols="12" md="8" lg="8" sm="12" xs="12" offset="2">
+      <v-col cols="12" md="8" offset="2">
         <v-toolbar flat tile>
           <v-img
+            v-if="getCocosLogo"
+            alt="LosCocosLogo"
             class="pt-4 pb-2 ml-2 mr-2"
             contain
-            max-width="25px"
-            alt="LosCocosLogo"
             id="LosCocosLogoMobile"
-            :src="require('@/assets/icons/footer/los-cocos-iso-footer.png')"
+            max-width="25px"
+            :src="getCocosLogo()"
           >
           </v-img>
           <v-toolbar-items
-            class="mb-2"
             v-for="item in footerMenu"
             :key="item.path"
+            class="mb-2"
           >
             <v-btn
               v-if="item.name"
@@ -27,30 +35,32 @@
             </v-btn>
           </v-toolbar-items>
           <v-spacer></v-spacer>
-          <v-btn
-            v-if="hotelData"
-            class="ma-0 pa-0 mr-4 mb-2 footline-1"
-            :href="`mailto:${hotelData.email}`"
-            target="_blank"
-            text
-          >
-            {{ hotelData.email }}
-          </v-btn>
-          <span v-if="hotelData" class="ma-0 pa-0 mb-2 mr-4 footline-2">
-            Tlf: {{ hotelData.phone }}
-          </span>
-          <v-btn
-            v-for="(icon, index) in socialMedia"
-            :key="icon.name"
-            :class="{ 'mr-0': index === 0 }"
-            class="mr-2 mb-2 pr-0"
-            icon
-            small
-            target="_blank"
-            :to="icon.url"
-          >
-            <span :class="icon.name"></span>
-          </v-btn>
+          <v-toolbar-items>
+            <v-btn
+              v-if="hotelData"
+              class="ma-0 pa-0 mr-4 mb-2 footline-1"
+              :href="`mailto:${hotelData.email}`"
+              target="_blank"
+              text
+            >
+              {{ hotelData.email }}
+            </v-btn>
+            <span v-if="hotelData" class="ma-0 pa-0 mb-2 mr-4 mt-6 footline-2">
+              Tlf: {{ hotelData.phone }}
+            </span>
+            <v-btn
+              v-for="(icon, index) in socialMedia"
+              :key="icon.name"
+              :class="{ 'mr-0': index === 0 }"
+              class="mr-2 mb-2 pr-0"
+              icon
+              small
+              target="_blank"
+              :to="icon.path"
+            >
+              <span :class="icon.name"></span>
+            </v-btn>
+          </v-toolbar-items>
         </v-toolbar>
       </v-col>
     </v-row>
@@ -67,6 +77,19 @@ export default {
       footerMenu: "getFooterMenu",
       socialMedia: "getSocialMedia",
     }),
+  },
+  methods: {
+    /**
+     * Get footer logo
+     */
+    getCocosLogo() {
+      let cocosLogo = require("@/assets/icons/footer/los-cocos-iso-footer.png");
+      if (cocosLogo) {
+        return cocosLogo;
+      } else {
+        return false;
+      }
+    },
   },
 };
 </script>
