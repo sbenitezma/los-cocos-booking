@@ -7,11 +7,11 @@
   <div class="booking-form">
     <BookingForm />
     <v-row class="mt-12 ml-10 pl-12 rooms-rates no-gutters">
-      <v-col cols="6" lg="6" md="6" sm="12" xs="12" offset="1">
+      <v-col cols="12" md="6" xs="12" offset-md="1">
         <h2>Rooms & Rates</h2>
         <p class="mt-2 mb-0 pb-0 body">Plan your perfect stay at our hotel</p>
         <v-img
-          class="pt-4 pb-2 ml-0 pl-0 mr-2"
+          class="pt-4 pb-2 ml-0 pl-0 mr-2 hide-mobile"
           contain
           max-width="350px"
           alt="BookingSteps"
@@ -20,7 +20,7 @@
         >
         </v-img>
       </v-col>
-      <v-col cols="4" lg="4" md="4" sm="12" xs="12" class="ml-12">
+      <v-col cols="4" md="4" offset-md="1" class="hidden-sm-and-down">
         <v-img
           class="pt-12 mt-12 mx-12 pl-12 mb-0"
           max-width="200px"

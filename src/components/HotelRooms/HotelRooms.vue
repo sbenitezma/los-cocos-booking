@@ -1,5 +1,5 @@
 <template>
-  <v-col cols="6" lg="6" md="6" sm="12" xs="12" offset="1">
+  <v-col cols="12" md="6" xs="12" offset-sm="1">
     <v-row no-gutters v-for="room in hotelRooms" v-bind:key="room.name">
       <v-col cols="12" lg="12" md="12">
         <v-hover v-slot:default="{ hover }">
@@ -9,25 +9,26 @@
             :class="{
               'v-card--active': bookingInfo.roomName === room.name,
             }"
-            class="v-card--small pa-4 pr-0"
+            class="v-card--small pt-4 pl-4 pr-0 pb-0 overflow-auto"
             exact
-            :max-height="230"
-            :max-width="590"
+            :max-height="250"
+            :width="590"
             outlined
             @click="selectRoom(room)"
           >
             <v-row no-gutters>
-              <v-col cols="4">
+              <v-col cols="12" sm="4" xs="12">
                 <v-img
+                  :aspect-ratio="4 / 3"
                   :alt="room.name"
-                  :height="190"
+                  :height="200"
                   :width="230"
                   :src="getRoomPhoto(room.thumbnail)"
                 />
               </v-col>
-              <v-col cols="8" class="d-flex flex-column ma-0 pa-0">
+              <v-col cols="8" xs="8" class="d-flex flex-column ma-0 pa-0">
                 <v-row no-gutters>
-                  <v-col cols="12">
+                  <v-col cols="12" xs="12">
                     <v-card-title
                       class="mt-0 pt-4 title-1"
                       v-if="room.name"
@@ -37,7 +38,7 @@
                     </v-card-title>
                     <v-card-subtitle
                       v-if="room.description"
-                      class="subheading pt-2"
+                      class="pt-2 subheading"
                       :data-tooltip="room.description"
                     >
                       {{ room.description }}
@@ -46,18 +47,22 @@
                       v-if="room.floorSize"
                       :data-tooltip="room.floorSize"
                     >
-                      <p class="subheading mt-5">Size: {{ room.floorSize }}</p>
+                      <p class="subheading mt-md-4 mt-sm-2">
+                        Size: {{ room.floorSize }}
+                      </p>
                       <p class="subheading">
                         <v-img
+                          v-if="getRoomIcon()"
                           :alt="room.name"
-                          class="mt-5 mb-1 ml-1"
+                          class="mt-md-4 mt-sm-2 mb-1 ml-1"
                           contain
                           :height="20"
                           :width="30"
-                          :src="require('@/assets/icons/hotel/double-bed.svg')"
+                          :src="getRoomIcon()"
                         />
+                        <v-icon v-else>mdi-bed-king-outline</v-icon>
                         <span>Beds: {{ room.numberOfBeds }}</span>
-                        <span class="ml-12">
+                        <span class="ml-md-12 ml-sm-12">
                           People: {{ room.occupancy }}
                         </span>
                         <span class="float-right subheading-1">
@@ -86,6 +91,17 @@ export default {
     }),
   },
   methods: {
+    /**
+     * Get double bed icon
+     */
+    getRoomIcon() {
+      let roomIcon = require("@/assets/icons/hotel/double-bed.svg");
+      if (roomIcon) {
+        return roomIcon;
+      } else {
+        return false;
+      }
+    },
     /**
      * Get Custom icon by name
      * @param name
