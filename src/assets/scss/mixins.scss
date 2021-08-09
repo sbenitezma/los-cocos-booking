@@ -1,0 +1,83 @@
+// =============================================================================
+// Calculate Rem by px
+// =============================================================================
+
+@function calculateRem($size) {
+  $remSize: $size / 16px;
+  @return $remSize * 1rem;
+}
+
+// =============================================================================
+// Font Face
+// =============================================================================
+
+@mixin font-style($color, $fontSize, $fontWeight, $lineHeight, $letterSpacing: none){
+  color: $color !important;
+  font-size: calculateRem($fontSize) !important;
+  font-weight: $fontWeight  !important;
+  line-height: $lineHeight !important;
+  @if $letterSpacing != false {
+    letter-spacing: $letterSpacing !important;
+  }
+}
+
+// =============================================================================
+// Get Footer Image based in a Image Sprite
+// =============================================================================
+@mixin footer-image($url, $positionX, $positionY, $width, $height) {
+  background: url($url) no-repeat $positionX $positionY;
+  display: inline-block;
+  width: $width;
+  height: $height;
+  overflow: hidden;
+  zoom: 0.5;
+  opacity: 0.8;
+}
+
+// =============================================================================
+// Custom Component Settings according Size
+// =============================================================================
+@mixin componentSettings($color, $fontSize, $fontWeight, $left: null, $letterSpacing: null, $lineHeight, $padding: null, $position: null, $textAlign: null, $top: null) {
+  font-size: $fontSize;
+  font-weight: $fontWeight;
+
+  @if ($color) {
+    color: $color;
+  }
+
+  @if ($left) {
+    left: $left;
+  }
+
+  @if ($letterSpacing) {
+    letter-spacing: $letterSpacing;
+  }
+
+  line-height: $lineHeight !important;
+
+  @if ($padding) {
+    padding: $padding;
+  }
+
+  @if ($position) {
+    position: $position;
+  }
+
+  @if ($textAlign) {
+    text-align: $textAlign;
+  }
+
+  @if ($top) {
+    top: $top;
+  }
+}
+
+// =============================================================================
+// Get theme color definition
+// =============================================================================
+@function color($value) {
+  @if map-has-key($theme-colors, $value) {
+    @return map-get($theme-colors, $value);
+  }
+  @return $defaultColor; //if it's not  declared color then return the default color
+}

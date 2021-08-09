@@ -1,0 +1,41 @@
+@import '~vuetify/src/styles/settings/_variables.scss';
+@import "./variables";
+@import "./mixins";
+@import "./typography";
+
+html,
+body,
+.v-application {
+  .headline,
+  .title,
+  [class*='text-'] {
+    font-family: $body-font-family !important;
+  }
+  font-family: $body-font-family !important;
+  .v-toolbar__content {
+    .v-btn__content {
+      font-family: $heading-font-family !important;
+    }
+  }
+  .justify-content {
+    .v-toolbar__content,
+    .v-toolbar__extension {
+      justify-content: space-around !important;
+    }
+  }
+  .btn-text {
+    text-transform: capitalize;
+  }
+  .rrss {
+    @include footer-image($footer-images-url, -385px, -16px, 50px, 55px);
+  }
+  .facebook {
+    @include footer-image($footer-images-url, -458px, -16px, 50px, 55px);
+  }
+  .instagram {
+    @include footer-image($footer-images-url, -532px, center, 55px, 55px);
+  }
+  .twitter {
+    @include footer-image($footer-images-url, right, center, 50px, 55px);
+  }
+}

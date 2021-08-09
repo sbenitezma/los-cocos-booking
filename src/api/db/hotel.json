@@ -1,0 +1,47 @@
+{
+  "data": {
+    "id": "LosCocos01",
+    "name": "Los Cocos Bungalows",
+    "phone": "+34 982 458 720",
+    "email": "reservations@loscocosbungalows.com",
+    "link": "http://hotelloscocos.com.mx/es/"
+  },
+  "rooms": [
+    {
+      "id": 1,
+      "name": "Mini Dreamy",
+      "description": "Generous and comfortable these modern furnished rooms offer two queen-size beds and are on the first floor",
+      "floorSize": "20m2",
+      "numberOfBeds": 1,
+      "occupancy": 2,
+      "price": 200,
+      "typeOfRoom": "Room",
+      "typeOfBed": "Queen-size",
+      "thumbnail": "room_1"
+    },
+    {
+      "id": 2,
+      "name": "Seet",
+      "description": "The perfect blend of comfort and culture, our superior room with a central garden view has the stunning, and comes with a...",
+      "floorSize": "50m2",
+      "numberOfBeds": 1,
+      "occupancy": 2,
+      "price": 350,
+      "typeOfRoom": "Bungalow",
+      "typeOfBed": "Standard",
+      "thumbnail": "room_2"
+    },
+    {
+      "id": 3,
+      "name": "Los Cocos",
+      "description": "If you want a little extra from your stay, you might like our superior rooms. A ocean view room has a private beach and a...",
+      "floorSize": "125m2",
+      "numberOfBeds": 3,
+      "occupancy": 4,
+      "price": 450,
+      "typeOfRoom": "Suite",
+      "typeOfBed": "Superior",
+      "thumbnail": "room_3"
+    }
+  ]
+}

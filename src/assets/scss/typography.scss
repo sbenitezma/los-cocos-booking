@@ -1,0 +1,37 @@
+// Navigation items
+.headline-1 {
+  @include font-style(color('secondary'), 13px, 600, 13px, 0);
+}
+// Footer email
+.footline-1 {
+  @include font-style(color('primary'), 13px, 600, 13px, 0);
+  text-transform: lowercase !important;
+}
+// Footer fonts
+.footline-2 {
+  @include font-style(color('primary'), 13px, 600, 13px, 0);
+}
+// Room name font
+.title-1 {
+  @include font-style(color('tertiary'), 18px, 700, 18px, 0);
+}
+// Room section font
+.subheading, .body {
+  @include font-style(color('tertiary'), 12px, 500, 16px);
+}
+// Room Price font
+.subheading-1 {
+  @include font-style(color('tertiary'), 18px, 700, 18px, 0);
+}
+// Reservation title
+.subheading-2 {
+  @include font-style(color('tertiary'), 20px, 600, 20px, 0);
+}
+// Reservation subtitle
+.subheading-3 {
+  @include font-style(color('tertiary'), 12px, 700, 16px);
+}
+// Reservation prices
+.subheading-4 {
+  @include font-style(color('tertiary'), 14px, 700, 14px);
+}
