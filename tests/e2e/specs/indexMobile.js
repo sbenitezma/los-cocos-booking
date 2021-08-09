@@ -1,37 +1,46 @@
-describe("Display Los Cocos Bungalows Desktop Application", () => {
+describe("Display Los Cocos Bungalows Mobile Application", () => {
   beforeEach(() => {
     cy.visit("/");
-    cy.viewport(1920, 1080);
+    cy.viewport(360, 640);
   });
 
-  describe("Test elements rendered on header/footer Navigation", () => {
-    it("Navbar element is visible", () => {
+  describe("Test navigation menu", () => {
+    it("Test Hamburguer menu is visible and clickable", () => {
       cy.get("[data-cy='navbar']")
+        .find("div[class='v-toolbar__content']")
+        .find("button")
+        .should("have.class", "v-app-bar__nav-icon")
         .should("be.visible")
         .should("not.be.empty")
-        .find("div[class='v-toolbar__content']")
-        .should("be.visible");
+        .click();
+      cy.get("[data-cy=mobile-navigation-menu]").should("be.visible");
     });
 
-    it("Test number of Navbar elements rendered on header Navbar", () => {
-      cy.get("[data-cy=navbar]")
+    it("Test number of Navbar elements rendered on Navigation Drawer", () => {
+      cy.get("[data-cy='navbar']")
         .find("div[class='v-toolbar__content']")
+        .find("button")
+        .click();
+      cy.get("[data-cy=mobile-navigation-menu]")
         .find("[data-cy*='header-nav-list-']")
-        .should("have.length", "7")
+        .should("have.length", "15")
         .each(($el, $index) => {
           if ($index !== 3) {
             cy.wrap($el)
-              .find("a")
-              .find(".v-btn__content")
+              .find("[data-cy=nav-menu-icon]")
+              .should("be.visible")
+              .should("have.class", "v-icon");
+            cy.wrap($el)
+              .find("[data-cy=nav-menu-text]")
               .should("be.visible")
               .should("not.be.empty");
           } else {
             cy.wrap($el)
-              .find("[data-cy=los-cocos-logo]")
+              .find("[data-cy=los-cocos-icon-mobile]")
               .should("have.attr", "style")
-              .should("include", "min-width: 100px;");
+              .should("include", "min-width: 50px;");
             cy.wrap($el)
-              .find("[data-cy=los-cocos-logo]")
+              .find("[data-cy=los-cocos-icon-mobile]")
               .should("be.visible")
               .should("not.be.empty")
               .find("div[class='v-image__image v-image__image--contain']")
@@ -41,39 +50,10 @@ describe("Display Los Cocos Bungalows Desktop Application", () => {
         });
     });
 
-    it("Footer menu section is visible", () => {
-      cy.get("[data-cy='footer']")
-        .should("be.visible")
-        .should("not.be.empty")
-        .find("div[class='v-toolbar__content']")
-        .should("be.visible");
-    });
-
-    it("Left footer menu elements are 4 and visible", () => {
+    it("Test footer menu section is not displayed", () => {
       cy.get("[data-cy='footer']")
         .find("div[class='v-toolbar__content']")
-        .find("[data-cy*='footer-nav-list-']")
-        .should("have.length", "4")
-        .each(($el) => {
-          cy.wrap($el)
-            .find("a")
-            .find(".v-btn__content")
-            .should("be.visible")
-            .should("not.be.empty");
-        });
-    });
-
-    it("Social Media section is visible and not empty", () => {
-      cy.get("[data-cy='footer']")
-        .find("div[class='v-toolbar__content']")
-        .find("[data-cy*='social-nav-list-']")
-        .should("have.length", "4")
-        .each(($el) => {
-          cy.wrap($el)
-            .find(".v-btn__content")
-            .should("be.visible")
-            .should("not.be.empty");
-        });
+        .should("not.be.visible");
     });
   });
 
@@ -101,21 +81,28 @@ describe("Display Los Cocos Bungalows Desktop Application", () => {
 
     checkOutDate = [day, month, year].join("/");
 
-    it("Booking form section is visible", () => {
+    it("Booking form destkop section is NOT visible", () => {
       cy.get("div[class='hotel-section']")
         .find("[data-cy='occupancy-form-desktop']")
+        .should("not.be.visible")
+        .should("not.be.empty");
+    });
+
+    it("Booking form mobile section is visible", () => {
+      cy.get("div[class='hotel-section']")
+        .find("[data-cy='occupancy-form-mobile']")
         .should("be.visible")
         .should("not.be.empty");
     });
 
-    it("Booking form section has proper background image", () => {
+    it("Booking form section has not background image", () => {
       cy.get("div[class='hotel-section']")
         .find("[data-cy='occupancy-form-background']")
-        .should("be.visible")
-        .should("not.be.empty")
-        .find("div[class='v-image__image v-image__image--contain']")
-        .and("have.css", "background-image")
-        .and("include", "los-cocos-room-header-2-x");
+        .should("not.be.visible");
+
+      cy.get("div[class='hotel-section']")
+        .find("[data-cy='occupancy-form-mobile']")
+        .should("have.class", "mobile-booking-section");
     });
 
     it("There are 5 form elements", () => {
@@ -126,9 +113,7 @@ describe("Display Los Cocos Bungalows Desktop Application", () => {
     });
 
     it("CheckIn and CheckOut form values are today and tomorrow", () => {
-      cy.get("[data-cy*='occupancy-form-desktop']")
-        .find("[data-cy*='booking-form']")
-        .find("div[class*='v-toolbar__title']")
+      cy.get("[data-cy*='occupancy-form-mobile']")
         .find("div[class*='v-input']")
         .find("[data-cy*='input-date']")
         .each(($el, $index) => {
@@ -142,19 +127,18 @@ describe("Display Los Cocos Bungalows Desktop Application", () => {
     });
 
     it("Adults occupancy selector is displayed properly with first selected value", () => {
-      cy.get("[data-cy*='occupancy-form-desktop']")
-        .find("[data-cy*='booking-form']")
-        .find("[data-cy*='form-occupancyAdults']")
+      cy.get("[data-cy*='occupancy-form-desktop']").should("not.be.visible");
+      cy.get("[data-cy*='occupancy-form-mobile']")
         .find("div[class='v-select__selection v-select__selection--comma']")
+        .first()
         .should("be.visible")
         .should("have.text", "Adults: 1");
     });
 
     it("Children occupancy selector is displayed properly with first selected value", () => {
-      cy.get("[data-cy*='occupancy-form-desktop']")
-        .find("[data-cy*='booking-form']")
-        .find("[data-cy*='form-occupancyChildren']")
+      cy.get("[data-cy*='occupancy-form-mobile']")
         .find("div[class='v-select__selection v-select__selection--comma']")
+        .last()
         .should("be.visible")
         .should("have.text", "Children: 0");
     });
@@ -167,7 +151,7 @@ describe("Display Los Cocos Bungalows Desktop Application", () => {
         .should("be.visible")
         .should("not.be.empty")
         .find("div[class*='col-']")
-        .should("have.class", "col-md-6")
+        .should("have.class", "col-12")
         .find("h2")
         .should("have.text", "Rooms & Rates");
     });
@@ -186,20 +170,10 @@ describe("Display Los Cocos Bungalows Desktop Application", () => {
         .and("have.css", "background-image")
         .and("include", "los-cocos-1");
     });
-
-    it("Summary jar is displayed properly", () => {
-      cy.get("div[class='hotel-section']")
-        .find("div[class*='rooms-rates']")
-        .find("[data-cy='hotel-jar']")
-        .find("div[id='HotelJar']")
-        .find("div[class^='v-image__image']")
-        .and("have.css", "background-image")
-        .and("include", "los-cocos-img-bg");
-    });
   });
 
   describe("Test Hotel Rooms container", () => {
-    it("Hotel Rooms container is displayed properly", () => {
+    it("Hotel Rooms container is displayed", () => {
       cy.get("[data-cy='container']")
         .should("be.visible")
         .should("not.be.empty")
@@ -215,7 +189,7 @@ describe("Display Los Cocos Bungalows Desktop Application", () => {
         .should("have.length", "3");
     });
 
-    it("Room card elements are shown", () => {
+    it("Test Room card elements are shown", () => {
       cy.get("div[class='hotel-section']")
         .find("[data-cy*='hotel-rooms-list']")
         .find("[data-cy*='room-list-']")
@@ -237,44 +211,43 @@ describe("Display Los Cocos Bungalows Desktop Application", () => {
           cy.wrap($el)
             .find("[data-cy*='room-card']")
             .find("[data-cy*='room-description']")
-            .should("be.visible")
+            .should("not.be.visible")
             .should("not.be.empty");
           cy.wrap($el)
             .find("[data-cy*='room-card']")
             .find("[data-cy*='room-floor-size']")
             .find("p")
             .contains("Size:")
-            .should("be.visible")
+            .should("not.be.visible")
             .should("not.be.empty");
           cy.wrap($el)
             .find("[data-cy*='room-card']")
             .find("[data-cy*='double-room-icon']")
             .find("div[class*='v-image__image v-image__image--contain']")
-            .should("be.visible")
+            .should("not.be.visible")
             .and("have.css", "background-image")
             .and("include", "double-bed");
           cy.wrap($el)
             .find("[data-cy*='room-card']")
             .find("[data-cy*='room-beds-number']")
             .contains("Beds:")
-            .should("be.visible")
+            .should("not.be.visible")
             .should("not.be.empty");
           cy.wrap($el)
             .find("[data-cy*='room-card']")
             .find("[data-cy*='room-occupancy']")
             .contains("People:")
-            .should("be.visible")
+            .should("not.be.visible")
             .should("not.be.empty");
           cy.wrap($el)
             .find("[data-cy*='room-card']")
             .find("[data-cy*='room-price']")
             .contains("€")
-            .should("be.visible")
+            .should("not.be.visible")
             .should("not.be.empty");
         });
     });
   });
-
   describe("Test Summary booking section", () => {
     it("Hotel Summary container is displayed properly", () => {
       cy.get("[data-cy='booking-summary']")

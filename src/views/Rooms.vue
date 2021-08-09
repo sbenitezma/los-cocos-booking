@@ -4,7 +4,7 @@
 }
 </style>
 <template>
-  <div class="booking-form">
+  <div class="hotel-section">
     <BookingForm />
     <v-row class="mt-12 ml-10 pl-12 rooms-rates no-gutters">
       <v-col cols="12" md="6" xs="12" offset-md="1">
@@ -20,12 +20,18 @@
         >
         </v-img>
       </v-col>
-      <v-col cols="4" md="4" offset-md="1" class="hidden-sm-and-down">
+      <v-col
+        cols="4"
+        md="4"
+        offset-md="1"
+        class="hidden-sm-and-down"
+        data-cy="hotel-jar"
+      >
         <v-img
-          class="pt-12 mt-12 mx-12 pl-12 mb-0"
-          max-width="200px"
           alt="HotelJar"
+          class="pt-12 mt-12 mx-12 pl-12 mb-0"
           id="HotelJar"
+          max-width="200px"
           :src="require('@/assets/images/los-cocos-img-bg.png')"
         >
         </v-img>
