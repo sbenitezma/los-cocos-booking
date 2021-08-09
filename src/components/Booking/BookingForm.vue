@@ -19,7 +19,11 @@
 </style>
 <template>
   <div>
-    <v-row no-gutters class="hidden-sm-and-up mobile-booking-section">
+    <v-row
+      data-cy="occupancy-form-mobile"
+      no-gutters
+      class="hidden-sm-and-up mobile-booking-section"
+    >
       <v-col cols="6" xs="6">
         <Datepicker
           data-cy="form-checkInDate"
@@ -85,6 +89,7 @@
     </v-row>
     <v-toolbar
       class="justify-space-around hidden-xs-only"
+      data-cy="occupancy-form-desktop"
       flat
       height="115"
       max-width="100%"
@@ -93,6 +98,7 @@
         alt="LosCocosHeadForm"
         class="mt-6"
         contain
+        data-cy="occupancy-form-background"
         id="LosCocosHeadForm"
         max-width="100%"
         :src="getHeaderImage()"
@@ -119,10 +125,9 @@
               @updateValue="updateValue"
             />
           </v-toolbar-title>
-          <v-toolbar-title class="pl-2 mt-4">
+          <v-toolbar-title class="pl-2 mt-4" data-cy="form-occupancyAdults">
             <v-select
               class="body-2"
-              data-cy="form-occupancyAdults"
               dense
               :height="45"
               :items="occupancyAdults"
@@ -137,10 +142,9 @@
               v-model="selectAdults"
             ></v-select>
           </v-toolbar-title>
-          <v-toolbar-title class="px-2 mt-4">
+          <v-toolbar-title class="px-2 mt-4" data-cy="form-occupancyChildren">
             <v-select
               class="body-2"
-              data-cy="form-occupancyChildren"
               dense
               :height="45"
               :items="occupancyChildren"

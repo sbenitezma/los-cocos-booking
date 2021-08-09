@@ -15,6 +15,7 @@
             alt="LosCocosLogo"
             class="pt-4 pb-2 ml-2 mr-2"
             contain
+            data-cy="los-cocos-footer-logo"
             id="LosCocosLogoMobile"
             max-width="25px"
             :src="getCocosLogo()"
@@ -22,8 +23,9 @@
           </v-img>
           <v-toolbar-items
             v-for="item in footerMenu"
-            :key="item.path"
             class="mb-2"
+            :data-cy="`footer-nav-list-${item.name}`"
+            :key="item.path"
           >
             <v-btn
               v-if="item.name"
@@ -39,13 +41,18 @@
             <v-btn
               v-if="hotelData"
               class="ma-0 pa-0 mr-4 mb-2 footline-1"
+              data-cy="footer-nav-hotel-email"
               :href="`mailto:${hotelData.email}`"
               target="_blank"
               text
             >
               {{ hotelData.email }}
             </v-btn>
-            <span v-if="hotelData" class="ma-0 pa-0 mb-2 mr-4 mt-6 footline-2">
+            <span
+              v-if="hotelData"
+              class="ma-0 pa-0 mb-2 mr-4 mt-6 footline-2"
+              data-cy="footer-nav-hotel-phone"
+            >
               Tlf: {{ hotelData.phone }}
             </span>
             <v-btn
@@ -53,6 +60,7 @@
               :key="icon.name"
               :class="{ 'mr-0': index === 0 }"
               class="mr-2 mb-2 pr-0"
+              :data-cy="`social-nav-list-${icon.name}`"
               icon
               small
               target="_blank"

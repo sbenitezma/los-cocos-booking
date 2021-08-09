@@ -19,6 +19,7 @@
       <v-toolbar-items
         v-for="(menu, index) in menuItems"
         class="hidden-sm-and-down"
+        :data-cy="`header-nav-list-${menu.name}`"
         :key="menu.name"
       >
         <v-img
@@ -49,27 +50,33 @@
       </v-toolbar-items>
     </v-toolbar>
 
-    <v-navigation-drawer v-model="drawer" absolute>
+    <v-navigation-drawer
+      data-cy="mobile-navigation-menu"
+      v-model="drawer"
+      absolute
+    >
       <v-list nav dense>
         <v-list-item
+          :data-cy="`header-nav-list-${item.name}`"
           v-for="item in mobileMenuItems"
           :key="item.name"
           :to="item.path"
           link
         >
           <v-list-item-icon v-if="item.icon">
-            <v-icon>{{ item.icon }}</v-icon>
+            <v-icon data-cy="nav-menu-icon">{{ item.icon }}</v-icon>
           </v-list-item-icon>
           <v-img
             v-if="!item.name"
             alt="LosCocosLogo"
             contain
+            data-cy="los-cocos-icon-mobile"
             id="LosCocosLogoMobile"
             min-width="50px"
             :src="getLogo('los-cocos-logo.svg')"
           >
           </v-img>
-          <v-list-item-title v-if="item.name">{{
+          <v-list-item-title data-cy="nav-menu-text" v-if="item.name">{{
             item.name
           }}</v-list-item-title>
         </v-list-item>

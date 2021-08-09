@@ -1,6 +1,11 @@
 <template>
-  <v-col cols="12" md="6" xs="12" offset-sm="1">
-    <v-row no-gutters v-for="room in hotelRooms" v-bind:key="room.name">
+  <v-col cols="12" md="6" xs="12" offset-sm="1" data-cy="hotel-rooms-list">
+    <v-row
+      v-for="room in hotelRooms"
+      v-bind:key="room.name"
+      :data-cy="`room-list-${room.name}`"
+      no-gutters
+    >
       <v-col cols="12" lg="12" md="12">
         <v-hover v-slot:default="{ hover }">
           <v-card
@@ -10,6 +15,7 @@
               'v-card--active': bookingInfo.roomName === room.name,
             }"
             class="v-card--small pt-4 pl-4 pr-0 pb-0 overflow-auto"
+            data-cy="room-card"
             exact
             :max-height="250"
             :width="590"
@@ -21,6 +27,7 @@
                 <v-img
                   :aspect-ratio="4 / 3"
                   :alt="room.name"
+                  data-cy="room-photo"
                   :height="200"
                   :width="230"
                   :src="getRoomPhoto(room.thumbnail)"
@@ -31,6 +38,7 @@
                   <v-col cols="12" xs="12">
                     <v-card-title
                       class="mt-0 pt-4 title-1"
+                      data-cy="room-name-type"
                       v-if="room.name"
                       :data-tooltip="room.name"
                     >
@@ -39,12 +47,14 @@
                     <v-card-subtitle
                       v-if="room.description"
                       class="pt-2 subheading"
+                      data-cy="room-description"
                       :data-tooltip="room.description"
                     >
                       {{ room.description }}
                     </v-card-subtitle>
                     <v-card-text
                       v-if="room.floorSize"
+                      data-cy="room-floor-size"
                       :data-tooltip="room.floorSize"
                     >
                       <p class="subheading mt-md-4 mt-sm-2">
@@ -56,16 +66,25 @@
                           :alt="room.name"
                           class="mt-md-4 mt-sm-2 mb-1 ml-1"
                           contain
+                          data-cy="double-room-icon"
                           :height="20"
                           :width="30"
                           :src="getRoomIcon()"
                         />
                         <v-icon v-else>mdi-bed-king-outline</v-icon>
-                        <span>Beds: {{ room.numberOfBeds }}</span>
-                        <span class="ml-md-12 ml-sm-12">
+                        <span data-cy="room-beds-number"
+                          >Beds: {{ room.numberOfBeds }}</span
+                        >
+                        <span
+                          class="ml-md-12 ml-sm-12"
+                          data-cy="room-occupancy"
+                        >
                           People: {{ room.occupancy }}
                         </span>
-                        <span class="float-right subheading-1">
+                        <span
+                          class="float-right subheading-1"
+                          data-cy="room-price"
+                        >
                           €{{ room.price }}
                         </span>
                       </p>
